@@ -1,0 +1,27 @@
+<div class="container" style="background: url('../assets/img/bg-1.jpg') no-repeat center center fixed; -webkit-background-size: cover;">
+  <form #formLogin="ngForm" (ngSubmit)="login(formLogin)" class="login-form">
+    <div class="login-wrap">
+      <p class="login-img"><i class="icon_lock_alt"></i></p>
+      <span>Usuario:</span>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_profile"></i></span>
+        <input name="email" type="text" class="form-control" [(ngModel)]="usuario.email" placeholder="Usuario">
+      </div>
+      <span>Contraseña:</span>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+        <input name="password" type="password" class="form-control" [(ngModel)]="usuario.password" placeholder="Contraseña">
+      </div>
+      <!-- <label class="checkbox">
+              <span class="pull-right"> <a href="re_contra.html"> ¿Olvidaste tu contraseña?</a></span>
+          </label> -->
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Ingresar</button>
+    </div>
+  </form>
+  <div class="text-right">
+    <div class="credits">
+
+      </div>
+  </div>
+</div>

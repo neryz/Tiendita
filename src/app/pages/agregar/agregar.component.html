@@ -1,0 +1,58 @@
+<app-header></app-header>
+<!--main content start-->
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa fa-bars"></i> AGREGAR VACANTES</h3>
+      </div>
+    </div>
+    <!-- page start-->
+    <!-- Page Content -->
+    <form action="" style="width: 45%; max-width: 650px; margin: auto; padding: 25px 65px; margin-top: 30px; padding-bottom: 30px; border-radius: 3px;">
+  		<!--<div>
+  			<h1 class="form-title" style="font-weight: normal; font-family: sans-serif; text-align: center; padding: 14px 0;"> C<span>ontacto</span></h1>
+  		</div>-->
+  		<!--<label for="nombre" style="display: block; color: black; font-size: 16px; position: relative;">NOMBRE(S) COMPLETO</label>-->
+      <input type="text" [(ngModel)]="vacante.negocio" name="negocio" ngModel placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+  		<!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
+  		<input type="text" [(ngModel)]="vacante.empleo" name="empleo" ngModel placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+  		<!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
+  		<textarea [(ngModel)]="vacante.requisitos" name="mensaje" ngModel placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"></textarea>
+      <input type="text" [(ngModel)]="vacante.horario" name="horario" ngModel placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+      <input type="text" [(ngModel)]="vacante.ubicacion" name="ubicacion" ngModel placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+  		<input (click)="crearVacante( vacante )" type="submit" value="AGREGAR VACANTE" style="display: block; color: black; font-size: 16px; position: relative; width: 100%; outline: none; background: #566573; border: none; color: #fff; padding: 15px 0; cursor: pointer;">
+  	</form>
+      <!-- <form #formLogin="ngForm" (ngSubmit)="login(formLogin)" class="login-form">
+        <div class="login-wrap">
+          <p class="login-img"></p>
+          <div class="input-group">
+            <span class="input-group-addon"></span>
+            <input type="text" class="form-control" placeholder="Nombre del Negocio" autofocus>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"></span>
+            <input type="text" class="form-control" placeholder="Nombre del empleo">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"></span>
+            <textarea type="text" class="form-control" placeholder="Requisitos"></textarea>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"></span>
+            <input type="text" class="form-control" placeholder="Horario">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon"></span>
+            <input type="text" class="form-control" placeholder="Ubicación">
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Agregar</button>
+        </div>
+      </form>
+      <div class="text-right">
+        <div class="credits">
+          </div>
+      </div> -->
+    </section>
+
+    </section>
