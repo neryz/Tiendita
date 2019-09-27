@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from 'src/app/services/auth.service';
 import {UsuarioService} from 'src/app/services/usuarios.service';
 import {UsuarioModel} from 'src/app/models/usuario.model';
 import { FormControl } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,15 +12,47 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+  filterUsuario= '';
   user:any;
   usuario: UsuarioModel = new UsuarioModel();
   // array con nombre vacantes de
   usuarios: UsuarioModel [] = [];
-  filterUsuario='';
+
   negocios = [];
   // constructor para poder mandar peticiones
   constructor(private servicioUsuarios: UsuarioService, private router: Router) {}
   // crearVacante -> es una funcion en donde le indico que mandaré datos al crearVacante de la funcion servicioVacantes
+    eliminarUsuarios(usuario: UsuarioModel){
+      Swal.fire({
+        title: '¿Está seguro de eliminar el usuario?',
+        text: "Una vez eliminado el usuario, no podrás recuperarlo",
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#3085d6',
+        confirmButtonColor: '#d33 ',
+        confirmButtonText: 'Eliminar'
+      }) .then((result) =>  {
+
+        if (result.value) {
+          this.servicioUsuarios.eliminarUsuarios(usuario);
+          Swal.fire(
+            'Eliminado satisfactoriamente!',
+            'El usuario ha sido eliminado',
+            'success'
+          )
+        }
+      });
+    }
+
+    showModal(){
+      Swal.fire({
+        title: 'Agregado!',
+        text: 'El proceso se ha realizado con éxito',
+        type: 'success',
+        confirmButtonText: 'Cool'
+      });
+    }
+
     crearUsuario( usuario: UsuarioModel ){
       this.servicioUsuarios.crearUsuario( usuario );
     }
@@ -38,9 +69,17 @@ export class UsuariosComponent implements OnInit {
       console.log('Voy a editar a:  ')
       this.servicioUsuarios.editarUsuarios( usuario );
     }
-    eliminarUsuarios (usuario: UsuarioModel){
-      this.servicioUsuarios.eliminarUsuarios(usuario);
+    showModalEditar(){
+      Swal.fire({
+        title: 'Agregado!',
+        text: 'Espere la visita de alguien que necesite del empleo',
+        type: 'success',
+        confirmButtonText: 'Cool'
+      });
     }
+    // eliminarUsuarios (usuario: UsuarioModel){
+    //   this.servicioUsuarios.eliminarUsuarios(usuario);
+    // }
     // This -> es una variable global de mi clase
     // termina
   ngOnInit() {
