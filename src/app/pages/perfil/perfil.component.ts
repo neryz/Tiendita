@@ -10,7 +10,9 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
+  user: any;
   usuarios: UsuarioModel [] = [];
+  usuario: UsuarioModel = new UsuarioModel();
 
   constructor(private servicioUsuarios: UsuarioService, private router: Router) { }
   getUsuarios (){
@@ -18,6 +20,13 @@ export class PerfilComponent implements OnInit {
       console.log(respuesta);
       this.usuarios = respuesta;
     });
+  }
+  editarUsuarios (usuario: UsuarioModel){
+    console.log('Voy a editar a:  ')
+    this.servicioUsuarios.editarUsuarios( usuario );
+  }
+  verUsuario (usuario: any){
+    this.usuario = usuario;
   }
   ngOnInit() {
     this.getUsuarios();

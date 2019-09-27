@@ -43,17 +43,45 @@
         <div class="blog-card blog-card-blog">
             <div class="blog-table" >
                 <h4 class="blog-card-caption">
-                    <a href="#">{{usu.negocio}}</a>
+                    <a href="#"  >{{usu.negocio}}</a>
                 </h4>
-                <p class="blog-card-description">{{usu.descripcion}}</p>
+                <p class="blog-card-description"  >{{usu.descripcion}}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success">Editar</button>
+              <button type="button" (click)="verUsuario(usu, exampleModal)" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar</button>
               <button type="button" class="btn btn-danger">Eliminar</button>
             </div>
         </div>
       </div>
 
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="negocio" class="col-form-label">Negocio:</label>
+              <input [(ngModel)]="usuario.negocio" name="negocio" ngModel type="text" class="form-control" id="negocio">
+            </div>
+            <div class="form-group">
+              <label for="descripcion" class="col-form-label">Descripción:</label>
+              <input [(ngModel)]="usuario.descripcion" name="descripcion" ngModel type="text" class="form-control" id="descripcion">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button (click)="editarUsuarios(usuario)" type="button" class="btn btn-primary" data-dismiss="modal">Editar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
