@@ -44,18 +44,16 @@ export class UsuariosComponent implements OnInit {
       });
     }
 
-    showModal(){
+    crearUsuario( usuario: UsuarioModel ){
+      this.servicioUsuarios.crearUsuario( usuario );
       Swal.fire({
         title: 'Agregado!',
         text: 'El proceso se ha realizado con éxito',
         type: 'success',
-        confirmButtonText: 'Cool'
+        confirmButtonText: 'OK'
       });
     }
 
-    crearUsuario( usuario: UsuarioModel ){
-      this.servicioUsuarios.crearUsuario( usuario );
-    }
     getUsuarios (){
       this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
         console.log(respuesta);
