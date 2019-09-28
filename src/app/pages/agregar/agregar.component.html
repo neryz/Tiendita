@@ -14,14 +14,56 @@
   			<h1 class="form-title" style="font-weight: normal; font-family: sans-serif; text-align: center; padding: 14px 0;"> C<span>ontacto</span></h1>
   		</div>-->
   		<!--<label for="nombre" style="display: block; color: black; font-size: 16px; position: relative;">NOMBRE(S) COMPLETO</label>-->
-      <input type="text" [(ngModel)]="vacante.negocio" name="negocio" ngModel placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-  		<!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
-  		<input type="text" [(ngModel)]="vacante.empleo" name="empleo" ngModel placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+      <input type="text" [(ngModel)]="vacante.negocio" 
+      name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" 
+      style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" 
+      required>
+      <div *ngIf="negocio.touched && !negocio.valid">
+          <div *ngIf="negocio.errors.required" style="color: red">
+            Por favor ingrese el nombre del negocio, el campo no debe de estar vacío
+          </div>
+        </div>
+      
+      <!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
+      
+      <input type="text" [(ngModel)]="vacante.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
   		<!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
-  		<textarea [(ngModel)]="vacante.requisitos" name="mensaje" ngModel placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"></textarea>
-      <input type="text" [(ngModel)]="vacante.horario" name="horario" ngModel placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-      <input type="text" [(ngModel)]="vacante.ubicacion" name="ubicacion" ngModel placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-  		<input (click)="crearVacante( vacante )" type="submit" value="AGREGAR VACANTE" style="display: block; color: black; font-size: 16px; position: relative; width: 100%; outline: none; background: #566573; border: none; color: #fff; padding: 15px 0; cursor: pointer;">
+      <div *ngIf="empleo.touched && !empleo.valid">
+          <div *ngIf="empleo.errors.required" style="color: red">
+            Por favor ingrese el empleo a cubrir, el campo no debe de estar vacío
+          </div>
+        </div>
+
+
+
+      <textarea [(ngModel)]="vacante.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
+      <div *ngIf="mensaje.touched && !mensaje.valid">
+          <div *ngIf="mensaje.errors.required" style="color: red">
+            Por favor ingrese los requisitos, el campo no debe de estar vacío
+          </div>
+        </div>
+      
+      
+      
+      
+      <input type="text" [(ngModel)]="vacante.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+      <div *ngIf="horario.touched && !horario.valid">
+          <div *ngIf="horario.errors.required" style="color: red">
+            Por favor ingrese el horario, el campo no debe de estar vacío
+          </div>
+        </div>
+
+
+
+      <input type="text" [(ngModel)]="vacante.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+      <div *ngIf="ubicacion.touched && !ubicacion.valid">
+          <div *ngIf="ubicacion.errors.required" style="color: red">
+            Por favor ingrese la ubicación del negocio, el campo no debe de estar vacío
+          </div>
+        </div>
+      
+      
+      <input (click)="crearVacante( vacante )" type="reset" value="AGREGAR VACANTE" style="display: block; color: black; font-size: 16px; position: relative; width: 100%; outline: none; background: #566573; border: none; color: #fff; padding: 15px 0; cursor: pointer;">
   	</form>
       <!-- <form #formLogin="ngForm" (ngSubmit)="login(formLogin)" class="login-form">
         <div class="login-wrap">

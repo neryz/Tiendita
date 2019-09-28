@@ -35,33 +35,103 @@
                   <!--<label for="nombre" style="display: block; color: black; font-size: 16px; position: relative;">NOMBRE(S) COMPLETO</label>-->
                   <div class="row ">
                     <div class="col">
-                      <input type="text" id="recipient-name" [(ngModel)]="usuario.negocio" name="nombre" ngModel placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                      <input type="text" id="recipient-name" [(ngModel)]="usuario.contacto" name="nombre" ngModel placeholder="Contacto" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                      <textarea [(ngModel)]="usuario.descripcion" name="mensaje" ngModel placeholder="Descripcion" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"></textarea>
+                      <input type="text" id="recipient-name" [(ngModel)]="usuario.negocio" name="nombre" #nombre="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required>
+                      <div *ngIf="nombre.touched && !nombre.valid">
+                          <div *ngIf="nombre.errors.required" style="color: red">
+                            Por favor ingrese el nombre del negocio, el campo no debe de estar vacío
+                          </div>
+                        </div>
 
+                      <input type="text" id="recipient-name" [(ngModel)]="usuario.contacto" name="nombre" #nombre="ngModel" placeholder="Contacto" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required>
+                        <div *ngIf="nombre.touched && !nombre.valid">
+                          <div *ngIf="nombre.errors.required" style="color: red">
+                            Por favor ingrese un contacto, el campo no debe de estar vacío
+                          </div>
+                        </div>
+                      
+                      
+                      
+                      <textarea [(ngModel)]="usuario.descripcion" name="mensaje" #mensaje="ngModel" placeholder="Descripcion" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
+                      <div *ngIf="mensaje.touched && !mensaje.valid">
+                          <div *ngIf="mensaje.errors.required" style="color: red">
+                            Por favor ingrese una breve descripción del negocio, el campo no debe de estar vacío
+                          </div>
+                        </div>
                     </div>
                   </div>
                   <!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
                   <!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
                   <div class="row">
                     <div class="col">
-                      <input type="text" [(ngModel)]="usuario.ubicacion" name="ubicacion" ngModel placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                      <input type="text" [(ngModel)]="usuario.fecha" name="fecha" ngModel placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+                      <input type="text" [(ngModel)]="usuario.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                      <div *ngIf="ubicacion.touched && !ubicacion.valid">
+                          <div *ngIf="ubicacion.errors.required" style="color: red">
+                            Por favor ingrese la Ubicación del negocio, el campo no debe de estar vacío
+                          </div>
+                        </div>
+                      
+                      
+                      
+                      
+                      <input type="text" [(ngModel)]="usuario.fecha" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                      <div *ngIf="fecha.touched && !fecha.valid">
+                          <div *ngIf="fecha.errors.required" style="color: red">
+                            Por favor ingrese la fecha de alta, el campo no debe de estar vacío
+                          </div>
+                        </div>
+                   
+                   
+                   
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <input type="text" [(ngModel)]="usuario.email" name="email" ngModel placeholder="Email" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                      <input type="text" [(ngModel)]="usuario.password" name="password" ngModel placeholder="Contraseña" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+                      <input type="text" [(ngModel)]="usuario.email" name="email" #email="ngModel" placeholder="Email" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                      <div *ngIf="email.touched && !email.valid">
+                          <div *ngIf="email.errors.required" style="color: red">
+                            Por favor ingrese un correo electrónico, el campo no debe de estar vacío
+                          </div>
+                        </div>
+                      
+                      
+                      
+                      <input type="text" [(ngModel)]="usuario.password" name="password" #password="ngModel" placeholder="Contraseña" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                      <div *ngIf="password.touched && !password.valid">
+                          <div *ngIf="password.errors.required" style="color: red">
+                            Por favor ingrese una contraseña, el campo no debe de estar vacío
+                          </div>
+                        </div>
+                    
+                    
+                    
+                    
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <input type="text" [(ngModel)]="usuario.RFC" name="RFC" ngModel placeholder="RFC" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                      <input type="text" [(ngModel)]="usuario.telefono" name="telefono" ngModel placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+                      <input type="text" [(ngModel)]="usuario.RFC" name="RFC" #RFC="ngModel" placeholder="RFC" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                      <div *ngIf="RFC.touched && !RFC.valid">
+                          <div *ngIf="RFC.errors.required" style="color: red">
+                            Por favor ingrese su RFC, el campo no debe de estar vacío
+                          </div>
+                        </div>
+
+
+
+
+                      <input type="text" [(ngModel)]="usuario.telefono" name="telefono" #telefono="ngModel" placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                      <div *ngIf="telefono.touched && !telefono.valid">
+                          <div *ngIf="telefono.errors.required" style="color: red">
+                            Por favor ingrese un número de teléfono, el campo no debe de estar vacío
+                          </div>
+                        </div>
+                  
+                  
+                  
+                  
                     </div>
                     <div class="col">
-                      <label for="advertence" style="color: red">*Por favor seleccione el tipo de negocio al que pertenece</label>
+                      <label for="advertence" style="color: red">*Por favor seleccione el tipo de negocio </label>
                       <select id="categoria" name="categoria" class="form-control" placeholder="Tipo" [(ngModel)]="usuario.categoria" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
                         <option value="Miscelanea">Miscelanea</option>
                         <option value="Comida">Comida</option>
@@ -70,7 +140,7 @@
                       </select>
                     </div>
                     <div class="col">
-                      <label for="advertence" style="color: red">*Por favor seleccione el tipo de negocio al que pertenece</label>
+                      <label for="advertence" style="color: red">*Seleccione tipo de usuario</label>
                       <select id="rol" name="rol" class="form-control" [(ngModel)]="usuario.roles" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
                         <option value="admin">Administrador</option>
                         <option value="client">Cliente</option>
