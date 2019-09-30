@@ -66,7 +66,16 @@ export class UsuariosComponent implements OnInit {
     editarUsuarios (usuario: UsuarioModel){
       console.log('Voy a editar a:  ')
       this.servicioUsuarios.editarUsuarios( usuario );
+      Swal.fire({
+        title: 'Editado!',
+        text: 'Los cambios se guardaron correctamente',
+        type: 'success',
+        confirmButtonText: 'OK'
+      });
     }
+
+
+
     showModalEditar(){
       Swal.fire({
         title: 'Agregado!',

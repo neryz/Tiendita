@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {VacantesService} from 'src/app/services/vacantes.service';
 import {VacanteModel} from 'src/app/models/vacantes.model';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
@@ -21,6 +21,12 @@ export class AgregarComponent implements OnInit {
     crearVacante( vacante: VacanteModel ){
       console.log('Voy a crear al vacante: ');
       this.servicioVacantes.crearVacante( vacante );
+      Swal.fire({
+        title: 'Vacante creada!',
+        text: 'Ahora tu vacante ya esta publicada',
+        type: 'success',
+        confirmButtonText: 'OK'
+      });
     }
     // getVacantes (){
     //   this.servicioVacantes.getVacantes().subscribe(respuesta => {
