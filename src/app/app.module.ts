@@ -24,7 +24,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     HeaderComponent,
     LoginComponent,
     HomeComponent,

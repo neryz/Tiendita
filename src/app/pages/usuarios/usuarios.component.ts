@@ -19,6 +19,9 @@ export class UsuariosComponent implements OnInit {
   usuarios: UsuarioModel [] = [];
 
   negocios = [];
+
+    public email: string = '';
+    public password: string = '';
   // constructor para poder mandar peticiones
   constructor(private servicioUsuarios: UsuarioService, private router: Router) {}
   // crearVacante -> es una funcion en donde le indico que mandaré datos al crearVacante de la funcion servicioVacantes
@@ -53,6 +56,9 @@ export class UsuariosComponent implements OnInit {
         confirmButtonText: 'OK'
       });
     }
+    onAddUser() {
+   this.servicioUsuarios.agregar(this.email, this.password).catch(err => console.log('err', err.message));
+ }
 
     getUsuarios (){
       this.servicioUsuarios.getUsuarios().subscribe(respuesta => {

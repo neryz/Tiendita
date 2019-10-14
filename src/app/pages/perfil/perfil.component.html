@@ -7,6 +7,7 @@
         <h3 class="page-header"><i class="fa fa-user"></i> PERFIL</h3>
       </div>
     </div>
+      <li *ngIf="userStatus && userStatus.role === 'admin'"><a [routerLink]="[ '/admin' ]">admin</a></li>
     <div class="row">
       <!-- profile-widget -->
       <div class="col-lg-12">
@@ -17,7 +18,7 @@
               <div class="follow-ava">
                 <img src="assets/img/Perfil.jpg" alt="">
               </div>
-              <h6>Administrator</h6>
+              <h6>Administrador</h6>
             </div>
             <div class="col-lg-4 col-sm-4 follow-info">
               <p>Hola, San Pablo Huixtepec es una comunidad de Oaxaca, queda aproximadamente a 1 hora de la capital, dependiendo el tráfico.</p>

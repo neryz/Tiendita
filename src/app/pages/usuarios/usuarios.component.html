@@ -48,9 +48,9 @@
                             Por favor ingrese un contacto, el campo no debe de estar vacío
                           </div>
                         </div>
-                      
-                      
-                      
+
+
+
                       <textarea [(ngModel)]="usuario.descripcion" name="mensaje" #mensaje="ngModel" placeholder="Descripcion" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
                       <div *ngIf="mensaje.touched && !mensaje.valid">
                           <div *ngIf="mensaje.errors.required" style="color: red">
@@ -69,19 +69,19 @@
                             Por favor ingrese la Ubicación del negocio, el campo no debe de estar vacío
                           </div>
                         </div>
-                      
-                      
-                      
-                      
+
+
+
+
                       <input type="text" [(ngModel)]="usuario.fecha" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
                       <div *ngIf="fecha.touched && !fecha.valid">
                           <div *ngIf="fecha.errors.required" style="color: red">
                             Por favor ingrese la fecha de alta, el campo no debe de estar vacío
                           </div>
                         </div>
-                   
-                   
-                   
+
+
+
                     </div>
                   </div>
                   <div class="row">
@@ -92,19 +92,19 @@
                             Por favor ingrese un correo electrónico, el campo no debe de estar vacío
                           </div>
                         </div>
-                      
-                      
-                      
+
+
+
                       <input type="text" [(ngModel)]="usuario.password" name="password" #password="ngModel" placeholder="Contraseña" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
                       <div *ngIf="password.touched && !password.valid">
                           <div *ngIf="password.errors.required" style="color: red">
                             Por favor ingrese una contraseña, el campo no debe de estar vacío
                           </div>
                         </div>
-                    
-                    
-                    
-                    
+
+
+
+
                     </div>
                   </div>
                   <div class="row">
@@ -125,10 +125,10 @@
                             Por favor ingrese un número de teléfono, el campo no debe de estar vacío
                           </div>
                         </div>
-                  
-                  
-                  
-                  
+
+
+
+
                     </div>
                     <div class="col">
                       <label for="advertence" style="color: red">*Por favor seleccione el tipo de negocio </label>
@@ -152,7 +152,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button (click)="crearUsuario( usuario )" type="reset" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                <button (click)="crearUsuario( usuario, onAddUser )" type="reset" data-dismiss="modal" class="btn btn-primary">Agregar</button>
               </div>
             </div>
           </div>

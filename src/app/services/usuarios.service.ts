@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { UsuarioModel } from '../models/usuario.model';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
+import {Observable, BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { VacanteModel } from '../models/vacantes.model';
+import {Router} from "@angular/router";
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,16 @@ export class UsuarioService {
   usDoc: AngularFirestoreDocument<any>;
   usuario: Observable<any>;
 
+  public currentUser: any;
+  public userStatus: string;
+  public userStatusChanges: BehaviorSubject<string> = new BehaviorSubject<string>(this.userStatus);
+
+
+  setUserStatus(userStatus: any): void {
+    this.userStatus = userStatus;
+    this.userStatusChanges.next(userStatus);
+  }
+
   vacDoc: AngularFirestoreDocument<any>;
   Vacante: Observable<any>;
 
@@ -24,18 +36,27 @@ export class UsuarioService {
   };
   private url = 'https://tiendita-92412.firebaseio.com/';
 
-  constructor( private afs: AngularFirestore, private afsAuth: AngularFireAuth) {
+  constructor( private afs: AngularFirestore, private afsAuth: AngularFireAuth, private router: Router) {
 
     this.prodCollection = afs.collection<any>('Usuarios');
     this.usuarios = this.prodCollection.valueChanges();
 
   }
 
-  crearUsuario(usuario: UsuarioModel) {
-    this.prodCollection.add({...usuario}).then( resp => {
+
+  agregar(email: string, pass: string) {
+    return new Promise((resolve, reject) => {
+      this.afsAuth.auth.createUserWithEmailAndPassword(email, pass).catch(err => console.log(reject(err)))
     });
-    console.log(usuario);
   }
+
+    crearUsuario(usuario: UsuarioModel){
+
+      this.prodCollection.add({...usuario}).then( resp => {
+      });
+      console.log(usuario)
+    }
+
   getUsuarios (){
     return this.usuario = this.prodCollection.snapshotChanges()
     .pipe( map( cambios => {
@@ -47,6 +68,7 @@ export class UsuarioService {
     }));
     console.log();
   }
+
   getVacantes (){
     return this.Vacante = this.prodCollection.snapshotChanges()
     .pipe( map( cambios => {
