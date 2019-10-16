@@ -78,3 +78,6 @@ h1{
 .modal-footer {
     background: #fff;
 }
+.col-form-label {
+  color: black;
+}
