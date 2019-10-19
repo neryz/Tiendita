@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { VacanteModel } from '../models/vacantes.model';
 import {Router} from "@angular/router";
+import { User } from '../shared/user.class';
 
 
 @Injectable({
@@ -36,19 +37,29 @@ export class UsuarioService {
   };
   private url = 'https://tiendita-92412.firebaseio.com/';
 
-  constructor( private afs: AngularFirestore, private afsAuth: AngularFireAuth, private router: Router) {
+  constructor( private afs: AngularFirestore, public afsAuth: AngularFireAuth, private router: Router) {
 
     this.prodCollection = afs.collection<any>('Usuarios');
     this.usuarios = this.prodCollection.valueChanges();
 
   }
 
+  // registerUser(email: string, pass: string) {
+  //     return new Promise((resolve, reject) => {
+  //       this.afsAuth.auth.createUserWithEmailAndPassword(email, pass)
+  //     });
+  //   }
 
-  agregar(email: string, pass: string) {
-    return new Promise((resolve, reject) => {
-      this.afsAuth.auth.createUserWithEmailAndPassword(email, pass).catch(err => console.log(reject(err)))
-    });
-  }
+    async onRegister (usuario: UsuarioModel){
+      try {
+        return await this.afsAuth.auth.createUserWithEmailAndPassword(
+          usuario.email,
+          usuario.password
+        );
+      }catch (error){
+        console.log('Error on registrer user', error);
+      }
+    }
 
     crearUsuario(usuario: UsuarioModel){
 

@@ -5,6 +5,8 @@ import {UsuarioService} from 'src/app/services/usuarios.service';
 import {UsuarioModel} from 'src/app/models/usuario.model';
 import { FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import  {User} from 'src/app/shared/user.class';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -19,6 +21,8 @@ export class UsuariosComponent implements OnInit {
   usuarios: UsuarioModel [] = [];
 
   negocios = [];
+
+  userAuth: User = new User();
 
     public email: string = '';
     public password: string = '';
@@ -56,10 +60,16 @@ export class UsuariosComponent implements OnInit {
         confirmButtonText: 'OK'
       });
     }
-    onAddUser() {
-   this.servicioUsuarios.agregar(this.email, this.password).catch(err => console.log('err', err.message));
- }
-
+ //    onAddUser() {
+ //   this.servicioUsuarios.registerUser(this.email, this.password).catch(err => console.log('err', err.message));
+ // }
+     async onRegister(){
+       console.log('entrada a registrer');
+       const usuario = await this.servicioUsuarios.onRegister(this.usuario);
+       if (usuario) {
+           console.log('Successfully created user');
+       }
+     }
     getUsuarios (){
       this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
         console.log(respuesta);

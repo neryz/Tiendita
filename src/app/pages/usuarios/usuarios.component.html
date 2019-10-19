@@ -152,7 +152,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button (click)="crearUsuario( usuario, onAddUser )" type="reset" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                <button (click)="crearUsuario( usuario )" (click)="onRegister(usuario)" type="reset" data-dismiss="modal" class="btn btn-primary">Agregar</button>
               </div>
             </div>
           </div>
@@ -274,3 +274,24 @@
     </div>
   </div>
 </div>
+
+<form class="login-form">
+  <div class="login-wrap">
+    <p class="login-img"><i class="icon_lock_alt"></i></p>
+    <span>Usuario:</span>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="icon_profile"></i></span>
+      <input name="email" type="text" [(ngModel)]="usuario.email" placeholder="Usuario">
+    </div>
+    <span>Contraseña:</span>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+      <input name="password" type="password" [(ngModel)]="usuario.password" placeholder="Contraseña">
+    </div>
+    <!-- <label class="checkbox">
+            <span class="pull-right"> <a href="re_contra.html"> ¿Olvidaste tu contraseña?</a></span>
+        </label> -->
+
+        <button class="btn btn-primary btn-lg btn-block" (click)="onRegister(userAuth)" type="submit">Ingresar</button>
+  </div>
+</form>
