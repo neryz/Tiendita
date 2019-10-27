@@ -7,7 +7,6 @@
         <h3 class="page-header"><i class="fa fa-user"></i> PERFIL</h3>
       </div>
     </div>
-      <li *ngIf="userStatus && userStatus.role === 'admin'"><a [routerLink]="[ '/admin' ]">admin</a></li>
     <div class="row">
       <!-- profile-widget -->
       <div class="col-lg-12">
@@ -18,7 +17,7 @@
               <div class="follow-ava">
                 <img src="assets/img/Perfil.jpg" alt="">
               </div>
-              <h6>Administrador</h6>
+              <h6>Administrator</h6>
             </div>
             <div class="col-lg-4 col-sm-4 follow-info">
               <p>Hola, San Pablo Huixtepec es una comunidad de Oaxaca, queda aproximadamente a 1 hora de la capital, dependiendo el tráfico.</p>
@@ -29,7 +28,8 @@
 
              </div>
 
-             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button>
+             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button> <br> <br>
+             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarModal" data-whatever="@mdo">Agregar Vacantes</button>
 
 
             </div>
@@ -46,17 +46,17 @@
                       <form>
                         <div class="form-group">
                           <label for="negocio" class="col-form-label">Negocio:</label>
-                          <input [(ngModel)]="usuario.negocio" name="negocio" ngModel type="text" class="form-control" id="negocio">
+                          <input [(ngModel)]="noticia.negocio" name="negocio" ngModel type="text" class="form-control" id="negocio">
                         </div>
                         <div class="form-group">
                           <label for="descripcion" class="col-form-label">Descripción:</label>
-                          <input [(ngModel)]="usuario.descripcion" name="descripcion" ngModel type="text" class="form-control" id="descripcion">
+                          <input [(ngModel)]="noticia.descripcion" name="descripcion" ngModel type="text" class="form-control" id="descripcion">
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button (click)=" crearUsuario(usuario)" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+                      <button (click)=" crearNoticias(noticia)" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
                     </div>
                   </div>
                 </div>
@@ -74,18 +74,21 @@
 
   <h1>Publicaciones realizadas</h1>
   <div class="container" >
-    <div class="col" *ngFor="let usu of usuarios">
+    <header>
+      <h4>Apartado de NOTICIAS</h4>
+    </header>
+    <div class="col" *ngFor="let noti of noticias">
       <div class="col-md-4">
         <div class="blog-card blog-card-blog">
             <div class="blog-table" >
                 <h4 class="blog-card-caption">
-                    <a href="#"  >{{usu.negocio}}</a>
+                    <a href="#"  >{{noti.negocio}}</a>
                 </h4>
-                <p class="blog-card-description"  >{{usu.descripcion}}</p>
+                <p class="blog-card-description"  >{{noti.descripcion}}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" (click)="verUsuario(usu, exampleModal)" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar</button>
-              <button type="button" (click)="eliminarUsuarios(usu)" class="btn btn-danger" >Eliminar</button>
+              <button type="button" (click)="verNoticia(noti, exampleModal)" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar</button>
+              <button type="button" (click)="eliminarNoticia(noti)" class="btn btn-danger" >Eliminar</button>
             </div>
         </div>
       </div>
@@ -96,29 +99,197 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+
         </div>
         <div class="modal-body">
           <form>
             <div class="form-group">
               <label for="negocio" class="col-form-label">Negocio:</label>
-              <input [(ngModel)]="usuario.negocio" name="negocio" ngModel type="text" class="form-control" id="negocio">
+              <input [(ngModel)]="noticia.negocio" name="negocio" ngModel type="text" class="form-control" id="negocio">
             </div>
             <div class="form-group">
               <label for="descripcion" class="col-form-label">Descripción:</label>
-              <input [(ngModel)]="usuario.descripcion" name="descripcion" ngModel type="text" class="form-control" id="descripcion">
+              <input [(ngModel)]="noticia.descripcion" name="descripcion" ngModel type="text" class="form-control" id="descripcion">
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button (click)="editarUsuarios(usuario)" type="button" class="btn btn-primary" data-dismiss="modal">Editar</button>
+          <button type="reset" value="borrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button (click)="editarNoticia(noticia)" type="reset" class="btn btn-primary" data-dismiss="modal">Editar</button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Seccion para vacantes -->
+  <div class="container" >
+    <header>
+      <h4>Apartado de VACANTES</h4>
+    </header>
+    <div class="col" *ngFor="let vacante of vacantes">
+      <div class="col-md-4">
+        <div class="blog-card blog-card-blog">
+            <div class="blog-table" >
+                <h4 class="blog-card-caption">
+                    <a href="#"  >{{vacante.negocio}}</a>
+                </h4>
+                <p class="blog-card-description"  >{{vacante.empleo}}</p>
+                <p class="blog-card-description"  >{{vacante.requisitos}}</p>
+                <p class="blog-card-description"  >{{vacante.horario}}</p>
+                <p class="blog-card-description"  >{{vacante.ubicacion}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" (click)="verVacante(vacante, editarModal)" class="btn btn-success" data-toggle="modal" data-target="#editarModal" data-whatever="@mdo">Editar</button>
+              <button type="button" (click)="eliminarVacantes(vacante)" class="btn btn-danger" >Eliminar</button>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 <!--main content end-->
+
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelh" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="exampleModalLabelh">Agregar Vacantes</h5>
+
+        </div>
+        <div class="modal-body">
+          <form>
+            <input type="text" [(ngModel)]="vacante.negocio"
+            name="negocio" #negocio="ngModel" placeholder="Nombre del negocio"
+            style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"
+            required>
+            <div *ngIf="negocio.touched && !negocio.valid">
+                <div *ngIf="negocio.errors.required" style="color: red">
+                  Por favor ingrese el nombre del negocio, el campo no debe de estar vacío
+                </div>
+              </div>
+
+            <!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
+
+            <input type="text" [(ngModel)]="vacante.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+        		<!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
+            <div *ngIf="empleo.touched && !empleo.valid">
+                <div *ngIf="empleo.errors.required" style="color: red">
+                  Por favor ingrese el empleo a cubrir, el campo no debe de estar vacío
+                </div>
+              </div>
+
+
+
+            <textarea [(ngModel)]="vacante.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
+            <div *ngIf="mensaje.touched && !mensaje.valid">
+                <div *ngIf="mensaje.errors.required" style="color: red">
+                  Por favor ingrese los requisitos, el campo no debe de estar vacío
+                </div>
+              </div>
+
+
+
+
+            <input type="text" [(ngModel)]="vacante.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+            <div *ngIf="horario.touched && !horario.valid">
+                <div *ngIf="horario.errors.required" style="color: red">
+                  Por favor ingrese el horario, el campo no debe de estar vacío
+                </div>
+              </div>
+
+
+
+            <input type="text" [(ngModel)]="vacante.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+            <div *ngIf="ubicacion.touched && !ubicacion.valid">
+                <div *ngIf="ubicacion.errors.required" style="color: red">
+                  Por favor ingrese la ubicación del negocio, el campo no debe de estar vacío
+                </div>
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button (click)=" crearVacante(vacante)" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalEditar" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title" id="exampleModalLabelh">Agregar Vacantes</h5>
+
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="text" [(ngModel)]="vacante.negocio"
+              name="negocio" #negocio="ngModel" placeholder="Nombre del negocio"
+              style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"
+              required>
+              <div *ngIf="negocio.touched && !negocio.valid">
+                  <div *ngIf="negocio.errors.required" style="color: red">
+                    Por favor ingrese el nombre del negocio, el campo no debe de estar vacío
+                  </div>
+                </div>
+
+              <!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
+
+              <input type="text" [(ngModel)]="vacante.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+          		<!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
+              <div *ngIf="empleo.touched && !empleo.valid">
+                  <div *ngIf="empleo.errors.required" style="color: red">
+                    Por favor ingrese el empleo a cubrir, el campo no debe de estar vacío
+                  </div>
+                </div>
+
+
+
+              <textarea [(ngModel)]="vacante.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
+              <div *ngIf="mensaje.touched && !mensaje.valid">
+                  <div *ngIf="mensaje.errors.required" style="color: red">
+                    Por favor ingrese los requisitos, el campo no debe de estar vacío
+                  </div>
+                </div>
+
+
+
+
+              <input type="text" [(ngModel)]="vacante.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+              <div *ngIf="horario.touched && !horario.valid">
+                  <div *ngIf="horario.errors.required" style="color: red">
+                    Por favor ingrese el horario, el campo no debe de estar vacío
+                  </div>
+                </div>
+
+
+
+              <input type="text" [(ngModel)]="vacante.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+              <div *ngIf="ubicacion.touched && !ubicacion.valid">
+                  <div *ngIf="ubicacion.errors.required" style="color: red">
+                    Por favor ingrese la ubicación del negocio, el campo no debe de estar vacío
+                  </div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button (click)=" editarVacantes(vacante)" type="button" class="btn btn-primary" data-dismiss="modal">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>

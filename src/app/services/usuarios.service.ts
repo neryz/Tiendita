@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UsuarioModel } from '../models/usuario.model';
+import { NoticiasModel } from '../models/noticias.model';
+import { UserInterface } from '../models/usuario.model';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import {Observable, BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -16,8 +18,14 @@ export class UsuarioService {
   private prodCollection: AngularFirestoreCollection<any>;
   private usuarios: Observable<any[]>;
 
+  private notCollection: AngularFirestoreCollection<any>;
+  private noticias: Observable<any[]>;
+
   usDoc: AngularFirestoreDocument<any>;
   usuario: Observable<any>;
+
+  notDoc: AngularFirestoreDocument<any>;
+  noticia: Observable<any>;
 
   public currentUser: any;
   public userStatus: string;
@@ -42,6 +50,9 @@ export class UsuarioService {
     this.prodCollection = afs.collection<any>('Usuarios');
     this.usuarios = this.prodCollection.valueChanges();
 
+    this.notCollection = afs.collection<any>('noticias');
+    this.noticias = this.prodCollection.valueChanges();
+
   }
 
   // registerUser(email: string, pass: string) {
@@ -52,10 +63,12 @@ export class UsuarioService {
 
     async onRegister (usuario: UsuarioModel){
       try {
-        return await this.afsAuth.auth.createUserWithEmailAndPassword(
-          usuario.email,
-          usuario.password
-        );
+        return new Promise((resolve, reject) => {
+          this.afsAuth.auth.createUserWithEmailAndPassword(
+            usuario.email,
+            usuario.password,
+          );
+        })
       }catch (error){
         console.log('Error on registrer user', error);
       }
@@ -68,8 +81,39 @@ export class UsuarioService {
       console.log(usuario)
     }
 
+    crearNoticias(noticia: NoticiasModel){
+
+      this.notCollection.add({...noticia}).then( resp => {
+      });
+      console.log(noticia)
+    }
+
+    private updateUserData (user) {
+      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`Usuario/${user.uid}`);
+      const data: UserInterface = {
+        id: user.uid,
+        email: user.email,
+        roles: {
+          admin: true
+        }
+      }
+      return userRef.set(data, {merge: true})
+    }
+
   getUsuarios (){
     return this.usuario = this.prodCollection.snapshotChanges()
+    .pipe( map( cambios => {
+      return cambios.map( accion => {
+        const data = accion.payload.doc.data() as any;
+        data.id = accion.payload.doc.id;
+        return data;
+      });
+    }));
+    console.log();
+  }
+
+  getNoticias (){
+    return this.noticia = this.notCollection.snapshotChanges()
     .pipe( map( cambios => {
       return cambios.map( accion => {
         const data = accion.payload.doc.data() as any;
@@ -100,12 +144,29 @@ export class UsuarioService {
     });
     console.log(usuario);
   }
+
+  editarNoticia (noticia: NoticiasModel){
+    const idnoticia = noticia.id;
+    this.notDoc = this.afs.doc<any>(`noticias/${idnoticia}`);
+    this.notDoc.update(noticia).then( resp => {
+    });
+    console.log(noticia);
+  }
+
   eliminarUsuarios (idusuario: UsuarioModel) {
     this.usDoc = this.afs.doc<any>(`Usuarios/${idusuario.id}`);
     this.usDoc.delete();
     console.log();
 
   }
+
+  eliminarNoticia (idnoticia: NoticiasModel) {
+    this.notDoc = this.afs.doc<any>(`noticias/${idnoticia.id}`);
+    this.notDoc.delete();
+    console.log();
+
+  }
+
   getCategoriasFilter(filtro: string){
     this.usDoc = this.afs.doc<any>(`/Usuarios`),{
       query: {
@@ -125,7 +186,13 @@ export class UsuarioService {
     }
     return this.usDoc;
   }
-
+  isUserAdmin (userUid: UsuarioModel){
+    const idusuario = userUid.id;
+    return this.afs.doc<UsuarioModel>(`Usuarios/${idusuario}`).valueChanges();
+  }
+  isAuth() {
+      return this.afsAuth.authState.pipe(map(auth => auth));
+    }
   // getCategoria(negocio: string){
   //   let categorias = this.getUsuarios();
   //   let categoria = categorias.filter( item => item.negocio == negocio)

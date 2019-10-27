@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import {UsuarioService} from 'src/app/services/usuarios.service';
 import {UsuarioModel} from 'src/app/models/usuario.model';
+import {UserInterface} from 'src/app/models/usuario.model';
 import { FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 import  {User} from 'src/app/shared/user.class';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 
 @Component({
@@ -15,7 +19,8 @@ import  {User} from 'src/app/shared/user.class';
 })
 export class UsuariosComponent implements OnInit {
   filterUsuario= '';
-  user:any;
+
+
   usuario: UsuarioModel = new UsuarioModel();
   // array con nombre vacantes de
   usuarios: UsuarioModel [] = [];
@@ -26,8 +31,17 @@ export class UsuariosComponent implements OnInit {
 
     public email: string = '';
     public password: string = '';
+
   // constructor para poder mandar peticiones
-  constructor(private servicioUsuarios: UsuarioService, private router: Router) {}
+  constructor(private servicioUsuarios: UsuarioService, private router: Router, private afs: AngularFirestore) {}
+
+      public isUserAdmin: any = null;
+      public userId: any = null;
+
+
+      user: UsuarioModel;
+      public providerId: string = 'null';
+
   // crearVacante -> es una funcion en donde le indico que mandaré datos al crearVacante de la funcion servicioVacantes
     eliminarUsuarios(usuario: UsuarioModel){
       Swal.fire({
@@ -53,6 +67,7 @@ export class UsuariosComponent implements OnInit {
 
     crearUsuario( usuario: UsuarioModel ){
       this.servicioUsuarios.crearUsuario( usuario );
+
       Swal.fire({
         title: 'Agregado!',
         text: 'El proceso se ha realizado con éxito',
@@ -76,6 +91,18 @@ export class UsuariosComponent implements OnInit {
         this.usuarios = respuesta;
       });
     }
+
+    getCurrentUser(){
+      console.log('recupero mi usuario');
+      this.servicioUsuarios.isAuth().subscribe(auth => {
+        if (auth){
+          this.userId = auth.uid;
+          this.servicioUsuarios.isUserAdmin(this.userId).subscribe(userRole =>{
+            this.isUserAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+          })
+        }
+      })
+    }
     verUsuario (usuario: any){
       this.usuario = usuario;
     }
@@ -89,8 +116,6 @@ export class UsuariosComponent implements OnInit {
         confirmButtonText: 'OK'
       });
     }
-
-
 
     showModalEditar(){
       Swal.fire({
@@ -107,6 +132,7 @@ export class UsuariosComponent implements OnInit {
     // termina
   ngOnInit() {
     this.getUsuarios();
+    this.getCurrentUser();
   }
   onSelect(event) {
     let query = null;

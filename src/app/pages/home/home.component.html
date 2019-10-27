@@ -1,45 +1,27 @@
 <app-header></app-header>
+
 <section id="main-content">
-  
   <section class="wrapper">
     <div class="row">
       <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa fa-bars"></i> NOTICIAS</h3>
-        <div class="nav search-row" id="top_menu">
-          <!--  search form start -->
-          <ul class="nav top-menu">
-           
-          </ul>
-          <!--  search form end -->
-        </div>
+        <h3 class="page-header"><i class="fa fa fa-bars"></i> ANUNCIOS</h3>
         <!--  -->
       </div>
     </div>
-    <!-- Modal -->
-    
-      </section>
-      
-      
-      <div class="container" >
-          <div class="col" *ngFor="let usu of usuarios">
-            <div class="col-md-4">
-              <div class="blog-card blog-card-blog">
-                  <div class="blog-table" >
-                      <h4 class="blog-card-caption">
-                          <a href="#"  >{{usu.negocio}}</a>
-                      </h4>
-                      <p class="blog-card-description"  >{{usu.descripcion}}</p>
-                  </div>
-                
+    <div class="container" >
+      <div class="col" *ngFor="let noticia of noticias">
+        <div class="col-md-4">
+          <div class="blog-card blog-card-blog">
+              <div class="blog-table" >
+                  <h4 class="blog-card-caption">
+                      <a href="#"  >{{noticia.negocio}}</a>
+                  </h4>
+                  <p class="blog-card-description"  >{{noticia.descripcion}}</p>
               </div>
-            </div>
-      
           </div>
         </div>
-        
-      
-        
 
-    
-
+      </div>
+    </div>
+  </section>
 </section>

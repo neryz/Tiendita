@@ -1,7 +1,7 @@
 export interface Roles {
-  client: boolean;
-  admin: boolean;
-  superadmin: boolean;
+  client?: boolean;
+  admin?: boolean;
+  superadmin?: boolean;
 }
 
 export class UsuarioModel{
@@ -9,12 +9,17 @@ export class UsuarioModel{
   userUid: string;
   email: string;
   password: string;
-    RFC:string;
-    negocio:string;
+  RFC:string;
+  negocio:string;
   numero:string;
-  telefono:number;
+  telefono:string;
   tipo:string;
-  Email:string;
-  contraseña:string;
-  opciones:string;
+  roles: Roles;
+}
+
+export interface UserInterface {
+  id:string;
+  email: string;
+  roles: Roles;
+
 }
