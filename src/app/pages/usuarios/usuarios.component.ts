@@ -19,29 +19,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class UsuariosComponent implements OnInit {
   filterUsuario= '';
-
-
   usuario: UsuarioModel = new UsuarioModel();
   // array con nombre vacantes de
   usuarios: UsuarioModel [] = [];
-
   negocios = [];
-
   userAuth: User = new User();
-
-    public email: string = '';
-    public password: string = '';
-
   // constructor para poder mandar peticiones
   constructor(private servicioUsuarios: UsuarioService, private router: Router, private afs: AngularFirestore) {}
-
       public isUserAdmin: any = null;
-      public userId: any = null;
-
-
-      user: UsuarioModel;
-      public providerId: string = 'null';
-
+      public userUid: string = null;
   // crearVacante -> es una funcion en donde le indico que mandaré datos al crearVacante de la funcion servicioVacantes
     eliminarUsuarios(usuario: UsuarioModel){
       Swal.fire({
@@ -65,16 +51,16 @@ export class UsuariosComponent implements OnInit {
       });
     }
 
-    crearUsuario( usuario: UsuarioModel ){
-      this.servicioUsuarios.crearUsuario( usuario );
+  crearUsuario( usuario: UsuarioModel ){
+    this.servicioUsuarios.crearUsuario( usuario );
 
-      Swal.fire({
-        title: 'Agregado!',
-        text: 'El proceso se ha realizado con éxito',
-        type: 'success',
-        confirmButtonText: 'OK'
-      });
-    }
+    Swal.fire({
+      title: 'Agregado!',
+      text: 'El proceso se ha realizado con éxito',
+      type: 'success',
+      confirmButtonText: 'OK'
+    });
+  }
  //    onAddUser() {
  //   this.servicioUsuarios.registerUser(this.email, this.password).catch(err => console.log('err', err.message));
  // }
@@ -96,8 +82,8 @@ export class UsuariosComponent implements OnInit {
       console.log('recupero mi usuario');
       this.servicioUsuarios.isAuth().subscribe(auth => {
         if (auth){
-          this.userId = auth.uid;
-          this.servicioUsuarios.isUserAdmin(this.userId).subscribe(userRole =>{
+          this.userUid = auth.uid;
+          this.servicioUsuarios.isUserAdmin(this.userUid).subscribe(userRole => {
             this.isUserAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
           })
         }

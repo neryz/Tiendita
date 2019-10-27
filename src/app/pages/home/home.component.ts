@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   noticia: NoticiasModel = new NoticiasModel();
 
   constructor(private servicioUsuarios: UsuarioService, private servicioVacantes: VacantesService, private router: Router) {}
+// Apartado de funciones para obtner
   getUsuarios (){
     this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
       console.log(respuesta);

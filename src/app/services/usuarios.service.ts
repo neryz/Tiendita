@@ -27,22 +27,14 @@ export class UsuarioService {
   notDoc: AngularFirestoreDocument<any>;
   noticia: Observable<any>;
 
-  public currentUser: any;
-  public userStatus: string;
-  public userStatusChanges: BehaviorSubject<string> = new BehaviorSubject<string>(this.userStatus);
-
-
-  setUserStatus(userStatus: any): void {
-    this.userStatus = userStatus;
-    this.userStatusChanges.next(userStatus);
-  }
-
   vacDoc: AngularFirestoreDocument<any>;
   Vacante: Observable<any>;
 
   public selected: any = {
     id: null
   };
+
+  user: UsuarioModel;
   private url = 'https://tiendita-92412.firebaseio.com/';
 
   constructor( private afs: AngularFirestore, public afsAuth: AngularFireAuth, private router: Router) {
@@ -67,15 +59,17 @@ export class UsuarioService {
           this.afsAuth.auth.createUserWithEmailAndPassword(
             usuario.email,
             usuario.password,
-          );
-        })
+          ).then(userData => {
+            resolve(userData),
+            this.updateUserData(userData.user)
+          })
+        });
       }catch (error){
         console.log('Error on registrer user', error);
       }
     }
 
     crearUsuario(usuario: UsuarioModel){
-
       this.prodCollection.add({...usuario}).then( resp => {
       });
       console.log(usuario)
@@ -89,7 +83,7 @@ export class UsuarioService {
     }
 
     private updateUserData (user) {
-      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`Usuario/${user.uid}`);
+      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
       const data: UserInterface = {
         id: user.uid,
         email: user.email,
@@ -186,9 +180,8 @@ export class UsuarioService {
     }
     return this.usDoc;
   }
-  isUserAdmin (userUid: UsuarioModel){
-    const idusuario = userUid.id;
-    return this.afs.doc<UsuarioModel>(`Usuarios/${idusuario}`).valueChanges();
+  isUserAdmin (userUid){
+    return this.afs.doc<UserInterface>(`users/${userUid}`).valueChanges();
   }
   isAuth() {
       return this.afsAuth.authState.pipe(map(auth => auth));

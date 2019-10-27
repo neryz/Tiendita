@@ -6,7 +6,6 @@ export interface Roles {
 
 export class UsuarioModel{
   id:string;
-  userUid: string;
   email: string;
   password: string;
   RFC:string;
