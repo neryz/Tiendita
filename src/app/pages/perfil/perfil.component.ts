@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UsuarioService} from 'src/app/services/usuarios.service';
 import {UsuarioModel} from 'src/app/models/usuario.model';
+import { UserInterface } from 'src/app/models/usuario.model';
 import {NoticiasModel} from 'src/app/models/noticias.model';
 import {VacantesService} from 'src/app/services/vacantes.service';
 import {VacanteModel} from 'src/app/models/vacantes.model';
@@ -14,7 +15,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  user: any;
   // modelos para los usuarios
   usuarios: UsuarioModel [] = [];
   usuario: UsuarioModel = new UsuarioModel();
@@ -29,6 +29,11 @@ export class PerfilComponent implements OnInit {
 // constructor para poder mandar peticiones
 
   constructor(private servicioUsuarios: UsuarioService, private router: Router, private servicioVacantes: VacantesService) { }
+  public isUserAdmin: any = null;
+  public isSuperAdmin: any = null;
+  public userUid: string = null;
+
+  private user: UsuarioModel;
 
   getNoticias (){
     this.servicioUsuarios.getNoticias().subscribe(respuesta => {
@@ -36,13 +41,35 @@ export class PerfilComponent implements OnInit {
       this.noticias = respuesta;
     });
   }
-
+  getUsuarios (){
+    this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
+      console.log(respuesta);
+      this.usuarios = respuesta;
+    });
+  }
   getVacantes (){
     this.servicioVacantes.getVacantes().subscribe(respuesta => {
       console.log(respuesta);
       this.vacantes = respuesta;
     });
   }
+
+  // getStatusUser(){
+  //   console.log('recupero mi usuario');
+  //   this.servicioUsuarios.isAuth().subscribe(auth => {
+  //     if (auth){
+  //       this.userUid = auth.uid;
+  //       // this.servicioUsuarios.isUserAdmin(this.userUid).subscribe(userRole => {
+  //       //   this.isUserAdmin = Object.assign({}, userRole).hasOwnProperty('admin');
+  //       //   this.isSuperAdmin = Object.assign({}, userRole).hasOwnProperty('superadmin');
+  //       // })
+  //       this.isUserAdmin = localStorage.getItem
+  //       const roles = localStorage.getItem('roles', 'admin');
+  //       console.log(roles) // 'Sarah'
+  //        // JSON.parse(localStorage.getItem('notes'))
+  //     }
+  //   })
+  // }
 
   crearVacante(vacante: VacanteModel){
     console.log('Voy a crear al vacante: ');
@@ -139,21 +166,13 @@ export class PerfilComponent implements OnInit {
   verVacante ( vacante: any){
     this.vacante = vacante;
   }
-
-  // Seccion de VacantesService
-
-
-  // limpiar(usuario: UsuarioModel) {
-  //     this.servicioUsuarios = {''};
-  //     this.active = false;
-  //     setTimeout(() => this.active = true, 0);
-  //   }
-
-
-
+    public providerId: string = 'null';
   ngOnInit() {
     this.getNoticias();
     this.getVacantes();
+    this.getUsuarios();
+    this.usuario = this.servicioUsuarios.getCurrentUser();
+    console.log(this.usuario);
   }
 
 }

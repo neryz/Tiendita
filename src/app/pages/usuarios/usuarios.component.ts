@@ -27,6 +27,7 @@ export class UsuariosComponent implements OnInit {
   // constructor para poder mandar peticiones
   constructor(private servicioUsuarios: UsuarioService, private router: Router, private afs: AngularFirestore) {}
       public isUserAdmin: any = null;
+      public isSuperAdmin: any = null;
       public userUid: string = null;
   // crearVacante -> es una funcion en donde le indico que mandaré datos al crearVacante de la funcion servicioVacantes
     eliminarUsuarios(usuario: UsuarioModel){
@@ -78,17 +79,30 @@ export class UsuariosComponent implements OnInit {
       });
     }
 
-    getCurrentUser(){
-      console.log('recupero mi usuario');
-      this.servicioUsuarios.isAuth().subscribe(auth => {
-        if (auth){
-          this.userUid = auth.uid;
-          this.servicioUsuarios.isUserAdmin(this.userUid).subscribe(userRole => {
-            this.isUserAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
-          })
-        }
-      })
-    }
+    // getCurrentUser(){
+    //   console.log('recupero mi usuario');
+    //   this.servicioUsuarios.isAuth().subscribe(auth => {
+    //     if (auth){
+    //       this.userUid = auth.uid;
+    //       this.servicioUsuarios.isUserAdmin(this.userUid).subscribe(userRole => {
+    //         this.isUserAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+    //       })
+    //     }
+    //   })
+    // }
+
+    // getCurrentSuperAdmin(){
+    //   console.log('recupero mi usuario');
+    //   this.servicioUsuarios.isAuth().subscribe(auth => {
+    //     if (auth){
+    //       this.userUid = auth.uid;
+    //       this.servicioUsuarios.isSuperAdmin(this.userUid).subscribe(userRole => {
+    //         this.isSuperAdmin = Object.assign({}, userRole.roles).hasOwnProperty('superadmin');
+    //         this.isSuperAdmin = true;
+    //       })
+    //     }
+    //   })
+    // }
     verUsuario (usuario: any){
       this.usuario = usuario;
     }
@@ -118,7 +132,8 @@ export class UsuariosComponent implements OnInit {
     // termina
   ngOnInit() {
     this.getUsuarios();
-    this.getCurrentUser();
+    // this.getCurrentSuperAdmin();
+    // this.getCurrentUser();
   }
   onSelect(event) {
     let query = null;

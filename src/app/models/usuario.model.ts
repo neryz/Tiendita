@@ -7,18 +7,17 @@ export interface Roles {
 export class UsuarioModel{
   id:string;
   email: string;
+  negocio:string;
   password: string;
   RFC:string;
-  negocio:string;
   numero:string;
   telefono:string;
   tipo:string;
-  roles: Roles;
+  roles: string;
 }
 
 export interface UserInterface {
-  id:string;
   email: string;
-  roles: Roles;
+  password: string;
 
 }

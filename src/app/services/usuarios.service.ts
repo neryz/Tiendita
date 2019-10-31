@@ -5,6 +5,8 @@ import { UserInterface } from '../models/usuario.model';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import {Observable, BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
+import { isNullOrUndefined } from "util";
+
 import { AngularFireAuth } from '@angular/fire/auth';
 import { VacanteModel } from '../models/vacantes.model';
 import {Router} from "@angular/router";
@@ -59,10 +61,7 @@ export class UsuarioService {
           this.afsAuth.auth.createUserWithEmailAndPassword(
             usuario.email,
             usuario.password,
-          ).then(userData => {
-            resolve(userData),
-            this.updateUserData(userData.user)
-          })
+          );
         });
       }catch (error){
         console.log('Error on registrer user', error);
@@ -82,17 +81,29 @@ export class UsuarioService {
       console.log(noticia)
     }
 
-    private updateUserData (user) {
-      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-      const data: UserInterface = {
-        id: user.uid,
-        email: user.email,
-        roles: {
-          admin: true
-        }
+    // private updateUserData (user) {
+    //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    //   const data: UserInterface = {
+    //     id: user.uid,
+    //     email: user.email,
+    //     roles: {
+    //       admin: true
+    //     }
+    //   }
+    //   return userRef.set(data, {merge: true})
+    // }
+    getCurrentUser(): UsuarioModel {
+      // localStorage.setItem ('usuario', JSON.stringify(this.usuario) );
+      let usuario_string = localStorage.getItem("usuario");
+      if (!isNullOrUndefined(usuario_string)) {
+        let usuario: UsuarioModel = JSON.parse(usuario_string);
+        return usuario;
+      } else {
+        return null;
       }
-      return userRef.set(data, {merge: true})
     }
+
+
 
   getUsuarios (){
     return this.usuario = this.prodCollection.snapshotChanges()
@@ -181,11 +192,28 @@ export class UsuarioService {
     return this.usDoc;
   }
   isUserAdmin (userUid){
-    return this.afs.doc<UserInterface>(`users/${userUid}`).valueChanges();
+    return this.afs.doc<UsuarioModel>(`Usuarios/${userUid}`).valueChanges();
+  }
+
+  isSuperAdmin (userUid){
+    return this.afs.doc<UsuarioModel>(`Usuarios/${userUid}`).valueChanges();
+  }
+
+  setUser(usuario: UsuarioModel): void {
+  let usuario_string = JSON.stringify(usuario);
+  localStorage.setItem("currentUser", usuario_string);
+}
+
+  setToken(token): void {
+    localStorage.setItem("accessToken", token);
+  }
+
+  getToken() {
+    return localStorage.getItem("accessToken");
   }
   isAuth() {
-      return this.afsAuth.authState.pipe(map(auth => auth));
-    }
+   return this.afsAuth.authState.pipe(map(auth => auth));
+ }
   // getCategoria(negocio: string){
   //   let categorias = this.getUsuarios();
   //   let categoria = categorias.filter( item => item.negocio == negocio)
