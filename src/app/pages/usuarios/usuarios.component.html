@@ -73,7 +73,7 @@
 
 
 
-                        <input type="text" [(ngModel)]="usuario.fecha" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                        <input type="text" [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
                         <div *ngIf="fecha.touched && !fecha.valid">
                             <div *ngIf="fecha.errors.required" style="color: red">
                               Por favor ingrese la fecha de alta, el campo no debe de estar vacío

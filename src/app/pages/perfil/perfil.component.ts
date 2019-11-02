@@ -21,6 +21,9 @@ export class PerfilComponent implements OnInit {
   // modelos para las noticias
   noticias: NoticiasModel [] = [];
   noticia: NoticiasModel = new NoticiasModel();
+
+  addNoticias: NoticiasModel [] = [];
+  addNoticia: NoticiasModel = new NoticiasModel();
   public active = true;
 
   vacante: VacanteModel = new VacanteModel();

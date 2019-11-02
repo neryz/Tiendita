@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 import  {User} from 'src/app/shared/user.class';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as moment from 'moment'
 
 
 
@@ -24,8 +25,14 @@ export class UsuariosComponent implements OnInit {
   usuarios: UsuarioModel [] = [];
   negocios = [];
   userAuth: User = new User();
+
+  aHourMoment: string = "";
   // constructor para poder mandar peticiones
-  constructor(private servicioUsuarios: UsuarioService, private router: Router, private afs: AngularFirestore) {}
+  constructor(private servicioUsuarios: UsuarioService, private router: Router, private afs: AngularFirestore) {
+    this.aHourMoment = (moment().format('YYYY-MM-DD HH:mm:ss'));
+
+     console.log(this.aHourMoment);
+  }
       public isUserAdmin: any = null;
       public isSuperAdmin: any = null;
       public userUid: string = null;
@@ -78,7 +85,16 @@ export class UsuariosComponent implements OnInit {
         this.usuarios = respuesta;
       });
     }
+    curTime(){
+      let  now = moment() // add this 2 of 4
+      console.log('hello world', now.format()); // add this 3 of 4
+      console.log(now.add(7, 'days').format());
+    }
 
+    oneHour(){
+
+
+    }
     // getCurrentUser(){
     //   console.log('recupero mi usuario');
     //   this.servicioUsuarios.isAuth().subscribe(auth => {
@@ -106,6 +122,10 @@ export class UsuariosComponent implements OnInit {
     verUsuario (usuario: any){
       this.usuario = usuario;
     }
+    verHour (hora: any){
+      this.aHourMoment = hora;
+    }
+
     editarUsuarios (usuario: UsuarioModel){
       console.log('Voy a editar a:  ')
       this.servicioUsuarios.editarUsuarios( usuario );
