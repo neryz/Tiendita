@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     password: '',
     RFC:'',
     numero:'',
-    telefono:'',
+    telefono: '',
     tipo:'',
     roles: ''
 };

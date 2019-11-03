@@ -11,7 +11,7 @@ export class UsuarioModel{
   password: string;
   RFC:string;
   numero:string;
-  telefono:string;
+  telefono: string;
   tipo:string;
   roles: string;
 }
