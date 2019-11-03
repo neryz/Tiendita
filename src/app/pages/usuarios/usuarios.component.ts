@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 import  {User} from 'src/app/shared/user.class';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as moment from 'moment'
+import { ViewChild } from '@angular/core';
+
 
 
 
@@ -19,6 +21,7 @@ import * as moment from 'moment'
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+  @ViewChild('myForm') formValues; 
   filterUsuario= '';
   usuario: UsuarioModel = new UsuarioModel();
   // array con nombre vacantes de
@@ -61,7 +64,7 @@ export class UsuariosComponent implements OnInit {
 
   crearUsuario( usuario: UsuarioModel ){
     this.servicioUsuarios.crearUsuario( usuario );
-
+    this.formValues.resetForm();
     Swal.fire({
       title: 'Agregado!',
       text: 'El proceso se ha realizado con éxito',

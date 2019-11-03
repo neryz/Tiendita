@@ -40,21 +40,27 @@
 
                     </div>
                     <div class="modal-body">
-                      <form>
+
+<!---aqui agregar noticia-->
+                      <form >
                         <div class="form-group">
                           <label for="noticia"  class="col-form-label">Negocio:</label>
                           <input [(ngModel)]="usuario.negocio" name="noticia" ngModel type="text" class="form-control" id="noticia" disabled>
                         </div>
-                        <div class="form-group">
-                          <label for="anuncio" class="col-form-label">Descripción:</label>
-                          <input [(ngModel)]="usuario.anuncio" name="anuncio" ngModel type="text" class="form-control" id="anuncio">
-                           <span [ngClass]="'noticia ' + usuario.negocio"></span>
-                        </div>
+                       
+                        <form #myForm="ngForm" (ngSubmit)="crearNoticias(myForm.value)">
+                           
+                            <div class="form-group">
+                              <label for="anuncio" class="col-form-label">Descripción:</label>
+                              <input [(ngModel)]="usuario.anuncio" name="anuncio" ngModel type="text" class="form-control" id="anuncio">
+                               <span [ngClass]="'noticia ' + usuario.negocio"></span>
+                            </div>
+                          </form>
                       </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button (click)=" crearNoticias(usuario)" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+                      <button (click)=" crearNoticias(usuario)"  type="button" class="btn btn-primary" [disabled]="myForm.invalid" data-dismiss="modal" >Agregar</button>
                     </div>
                   </div>
                 </div>
@@ -111,6 +117,8 @@
 
           </div>
           <div class="modal-body">
+
+
             <form>
               <div class="form-group">
                 <label for="negocio" class="col-form-label">Negocio:</label>
@@ -171,45 +179,39 @@
 
           </div>
           <div class="modal-body">
-            <form>
-              <input type="text" [(ngModel)]="usuario.negocio" disabled
-              name="negocio" #negocio="ngModel" placeholder="Nombre del negocio"
-              style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"
-              required>
-              <div *ngIf="negocio.touched && !negocio.valid">
-                  <div *ngIf="negocio.errors.required" style="color: red">
-                    Por favor ingrese el nombre del negocio, el campo no debe de estar vacío
-                  </div>
-                </div>
 
-              <!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
+            <form  >
 
-              <input type="text" [(ngModel)]="usuario.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-          		<!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
+              <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"    required>
+              
+                <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
+                
+
+
+
+
+                
+            <form #mForm="ngForm" (ngSubmit)="crearVacante(mForm.value)">
+
+              <input type="text" [(ngModel)]="usuario.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
               <div *ngIf="empleo.touched && !empleo.valid">
-                  <div *ngIf="empleo.errors.required" style="color: red">
-                    Por favor ingrese el empleo a cubrir, el campo no debe de estar vacío
-                  </div>
-                </div>
+                  <div *ngIf="empleo.errors.required" style="color: red">  Por favor ingrese el empleo a cubrir </div>
+              </div>
 
 
 
-              <textarea [(ngModel)]="usuario.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
+              <textarea [(ngModel)]="usuario.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required></textarea>
               <div *ngIf="mensaje.touched && !mensaje.valid">
-                  <div *ngIf="mensaje.errors.required" style="color: red">
-                    Por favor ingrese los requisitos, el campo no debe de estar vacío
-                  </div>
+                  <div *ngIf="mensaje.errors.required" style="color: red">   Por favor ingrese los requisitos </div>
                 </div>
 
 
 
 
-              <input type="date" [(ngModel)]="usuario.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+              <input type="date" [(ngModel)]="usuario.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
               <div *ngIf="horario.touched && !horario.valid">
-                  <div *ngIf="horario.errors.required" style="color: red">
-                    Por favor ingrese el horario, el campo no debe de estar vacío
-                  </div>
-                </div>
+                  <div *ngIf="horario.errors.required" style="color: red">  Por favor ingrese el horario  </div>
+              </div>
 
                 <div class="col">
                   <label for="advertence" style="color: red">*Por favor seleccione el tipo de trabajo </label>
@@ -218,19 +220,14 @@
                     <option value="Fijo">Fijo</option>
                   </select>
                 </div>
+            </form>
 
-
-              <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-              <div *ngIf="ubicacion.touched && !ubicacion.valid">
-                  <div *ngIf="ubicacion.errors.required" style="color: red">
-                    Por favor ingrese la ubicación del negocio, el campo no debe de estar vacío
-                  </div>
-                </div>
+              
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button (click)=" crearVacante(usuario)" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+            <button (click)=" crearVacante(usuario)"  type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="mForm.invalid">Agregar</button>
           </div>
         </div>
       </div>

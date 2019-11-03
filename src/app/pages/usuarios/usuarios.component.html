@@ -28,45 +28,32 @@
                   <h5 class="modal-title" id="exampleModalLabel">AGREGAR USUARIO</h5>
                 </div>
                 <div class="modal-body">
-                  <!-- <form action="" style="width: 45%; max-width: 650px; margin: auto; padding: 25px 65px; margin-top: 30px; padding-bottom: 30px; border-radius: 3px;"> -->
-                    <!--<div>
-                      <h1 class="form-title" style="font-weight: normal; font-family: sans-serif; text-align: center; padding: 14px 0;"> C<span>ontacto</span></h1>
-                    </div>-->
-                    <!--<label for="nombre" style="display: block; color: black; font-size: 16px; position: relative;">NOMBRE(S) COMPLETO</label>-->
+                    <form #myForm="ngForm" (ngSubmit)="submitForm(myForm.value)">
                     <div class="row ">
                       <div class="col">
                         <input type="text" id="recipient-name" [(ngModel)]="usuario.negocio" name="nombre" #nombre="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required>
                         <div *ngIf="nombre.touched && !nombre.valid">
-                            <div *ngIf="nombre.errors.required" style="color: red">
-                              Por favor ingrese el nombre del negocio, el campo no debe de estar vacío
-                            </div>
+                            <div *ngIf="nombre.errors.required" style="color: red"> Por favor ingrese el nombre del negocio   </div>
                           </div>
 
-                        <input type="text" id="recipient-name" [(ngModel)]="usuario.contacto" name="nombre" #nombre="ngModel" placeholder="Contacto" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required>
-                          <div *ngIf="nombre.touched && !nombre.valid">
-                            <div *ngIf="nombre.errors.required" style="color: red">
-                              Por favor ingrese un contacto, el campo no debe de estar vacío
-                            </div>
-                          </div>
-
+                       
 
 
                         <textarea [(ngModel)]="usuario.descripcion" name="mensaje" #mensaje="ngModel" placeholder="Descripcion" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
                         <div *ngIf="mensaje.touched && !mensaje.valid">
                             <div *ngIf="mensaje.errors.required" style="color: red">
-                              Por favor ingrese una breve descripción del negocio, el campo no debe de estar vacío
+                              Por favor ingrese una breve descripción del negocio
                             </div>
                           </div>
                       </div>
                     </div>
-                    <!--<label for="email" style="display: block; color: black; font-size: 16px; position: relative;" >E-MAIL</label>-->
-                    <!--<label for="mensaje" style="display: block; color: black; font-size: position: relative;">MENSAJE</label>-->
+                   
                     <div class="row">
                       <div class="col">
                         <input type="text" [(ngModel)]="usuario.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
                         <div *ngIf="ubicacion.touched && !ubicacion.valid">
                             <div *ngIf="ubicacion.errors.required" style="color: red">
-                              Por favor ingrese la Ubicación del negocio, el campo no debe de estar vacío
+                              Por favor ingrese la Ubicación del negocio
                             </div>
                           </div>
 
@@ -74,11 +61,7 @@
 
 
                         <input type="text" [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-                        <div *ngIf="fecha.touched && !fecha.valid">
-                            <div *ngIf="fecha.errors.required" style="color: red">
-                              Por favor ingrese la fecha de alta, el campo no debe de estar vacío
-                            </div>
-                          </div>
+                        
 
 
 
@@ -86,20 +69,24 @@
                     </div>
                     <div class="row">
                       <div class="col">
-                        <input type="text" [(ngModel)]="usuario.email" name="email" #email="ngModel" placeholder="Email" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                        <input type="email" [(ngModel)]="usuario.email" name="email" #email="ngModel" placeholder="Email" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
                         <div *ngIf="email.touched && !email.valid">
                             <div *ngIf="email.errors.required" style="color: red">
                               Por favor ingrese un correo electrónico, el campo no debe de estar vacío
                             </div>
+                            
                           </div>
 
 
 
-                        <input type="text" [(ngModel)]="usuario.password" name="password" #password="ngModel" placeholder="Contraseña" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                        <input type="password" [(ngModel)]="usuario.password" name="password" #password="ngModel" placeholder="Contraseña" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="8" maxlength="10" required>
                         <div *ngIf="password.touched && !password.valid">
                             <div *ngIf="password.errors.required" style="color: red">
                               Por favor ingrese una contraseña, el campo no debe de estar vacío
                             </div>
+                            <div *ngIf="password.errors.minlength" style="color: red">
+                                La contraseña debe tener de 8 a 10 caracteres
+                              </div>
                           </div>
 
 
@@ -109,36 +96,34 @@
                     </div>
                     <div class="row">
                       <div class="col">
-                        <input type="text" [(ngModel)]="usuario.RFC" name="RFC" #RFC="ngModel" placeholder="RFC" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                        <input type="text" [(ngModel)]="usuario.RFC" name="RFC" #RFC="ngModel" placeholder="RFC" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="12" maxlength="13" required>
                         <div *ngIf="RFC.touched && !RFC.valid">
                             <div *ngIf="RFC.errors.required" style="color: red">
-                              Por favor ingrese su RFC, el campo no debe de estar vacío
+                              Por favor ingrese su RFC
                             </div>
+                            <div *ngIf="RFC.errors.minlength" style="color: red">
+                                Por favor un RFC válido
+                              </div>
                           </div>
 
 
 
 
-                        <input type="text" [(ngModel)]="usuario.telefono" name="telefono" #telefono="ngModel" placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                        <input type="tel" [(ngModel)]="usuario.telefono" name="telefono" #telefono="ngModel" placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="12" maxlength="13" required>
                         <div *ngIf="telefono.touched && !telefono.valid">
                             <div *ngIf="telefono.errors.required" style="color: red">
                               Por favor ingrese un número de teléfono, el campo no debe de estar vacío
                             </div>
+                            <div *ngIf="telefono.errors.minlength" style="color: red">
+                                Por favor ingrese un número de teléfono válido
+                              </div>
                           </div>
 
 
 
 
                       </div>
-                      <div class="col">
-                        <label for="advertence" style="color: red">*Por favor seleccione el tipo de negocio </label>
-                        <select id="categoria" name="categoria" class="form-control" placeholder="Tipo" [(ngModel)]="usuario.categoria" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
-                          <option value="Miscelanea">Miscelanea</option>
-                          <option value="Comida">Comida</option>
-                          <option value="Salud">Salud</option>
-                          <option value="Diversion">Diversión</option>
-                        </select>
-                      </div>
+                     
                       <div class="col">
                         <label for="advertence" style="color: red">*Seleccione tipo de usuario</label>
                         <select id="rol" name="rol" class="form-control" [(ngModel)]="usuario.roles" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
@@ -148,11 +133,12 @@
                         </select>
                       </div>
                     </div>
-                  <!-- </form> -->
+                    </form>
                 </div>
+                
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button (click)="crearUsuario( usuario )" (click)="onRegister(usuario)" type="reset" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                  <button  (click)="crearUsuario( usuario )" (click)="onRegister(usuario)" [disabled] ="myForm.invalid" type="button"   data-dismiss="modal" class="btn btn-primary">Agregar</button>
                 </div>
               </div>
             </div>

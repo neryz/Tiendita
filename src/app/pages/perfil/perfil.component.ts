@@ -9,12 +9,15 @@ import {VacantesService} from 'src/app/services/vacantes.service';
 import {VacanteModel} from 'src/app/models/vacantes.model';
 import { FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ViewChild } from '@angular/core';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
+  @ViewChild('myForm') formValues; 
+  @ViewChild('mForm') formValue; 
   // modelos para los usuarios
   usuarios: UsuarioModel [] = [];
   usuario: UsuarioModel = new UsuarioModel();
@@ -77,6 +80,7 @@ export class PerfilComponent implements OnInit {
   crearVacante(vacante: VacanteModel){
     console.log('Voy a crear al vacante: ');
     this.servicioVacantes.crearVacante( vacante );
+    this.formValue.resetForm();
     Swal.fire({
       title: 'Vacante creada!',
       text: 'Ahora tu vacante ya esta publicada',
@@ -87,6 +91,7 @@ export class PerfilComponent implements OnInit {
 
     crearNoticias( noticia: NoticiasModel ){
       this.servicioUsuarios.crearNoticias( noticia );
+      this.formValues.resetForm();
       Swal.fire({
         title: 'Agregado!',
         text: 'El proceso se ha realizado con éxito',
