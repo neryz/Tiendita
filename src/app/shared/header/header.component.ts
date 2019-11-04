@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { UsuarioModel } from 'src/app/models/usuario.model';
-import { UserInterface } from 'src/app/models/usuario.model';
-import {UsuarioService} from 'src/app/services/usuarios.service';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-import {Observable, BehaviorSubject} from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import {Router} from "@angular/router";
+import {UsuarioService} from 'src/app/services/usuarios.service';
+import {UsuarioModel} from 'src/app/models/usuario.model';
+import {UserInterface} from 'src/app/models/usuario.model';
+import { FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import  {User} from 'src/app/shared/user.class';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as moment from 'moment'
+import { ViewChild } from '@angular/core';
 
 
 @Component({
@@ -17,8 +19,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  usuario: UsuarioModel = new UsuarioModel();
+  // array con nombre vacantes de
+  usuarios: UsuarioModel [] = [];
   constructor(private servicioUsuarios: UsuarioService, private router: Router, private afs: AngularFirestore) {}
+
+  getUsuarios (){
+    this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
+      this.usuarios = respuesta;
+    });
+  }
       // public isUserAdmin: any = null;
       // public isSuperAdmin: any = null;
       // public userUid: string = null;
@@ -68,6 +78,7 @@ export class HeaderComponent implements OnInit {
      });
   }
   ngOnInit() {
+    this.getUsuarios();
     // this.getCurrentUser();
     // this.getCurrentSuperAdmin();
 

@@ -21,10 +21,11 @@ import { VacantesComponent } from './pages/vacantes/vacantes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     HeaderComponent,
     LoginComponent,
     HomeComponent,
@@ -42,7 +43,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent]

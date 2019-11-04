@@ -16,8 +16,8 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  @ViewChild('myForm') formValues; 
-  @ViewChild('mForm') formValue; 
+  @ViewChild('myForm') formValues;
+  @ViewChild('mForm') formValue;
   // modelos para los usuarios
   usuarios: UsuarioModel [] = [];
   usuario: UsuarioModel = new UsuarioModel();
@@ -40,6 +40,34 @@ export class PerfilComponent implements OnInit {
   public userUid: string = null;
 
   private user: UsuarioModel;
+
+  device = [
+    {'name':'Lunes','checked':false},
+    {'name':'Martes','checked':false},
+    {'name':'Miercoles','checked':false},
+    {'name':'Jueves','checked':false},
+    {'name':'Viernes','checked':false}];
+
+  deviceFilter = '';
+
+  deviceFiltered = this.device.slice(0);
+
+  selectFiltered(){
+    this.deviceFiltered.forEach(i=>i.checked=true);
+  }
+
+  deSelectFiltered(){
+    this.deviceFiltered.forEach(i=>i.checked=false);
+  }
+
+  // onFilterChange(){
+  //   if (this.deviceFilter.length > 0) {
+  //     this.deviceFiltered = this.device.filter(i => i.name.indexOf(this.deviceFilter) > -1);
+  //     console.log(this.deviceFiltered);
+  //   } else {
+  //     this.deviceFiltered = this.device.slice(0);
+  //   }
+  // }
 
   getNoticias (){
     this.servicioUsuarios.getNoticias().subscribe(respuesta => {

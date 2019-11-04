@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
 // Apartado de funciones para obtner
   getUsuarios (){
     this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
-      console.log(respuesta);
       this.usuarios = respuesta;
     });
   }

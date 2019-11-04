@@ -24,8 +24,12 @@
               <p>{{usuario.descripcion}}</p>
              </div>
 
-             <button *ngIf="roles == admin; else noUserAdmin" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button> <br> <br>
-             <button *ngIf="roles == admin; else noUserAdmin" type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarModal" data-whatever="@mdo">Agregar Vacantes</button>
+             <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button>
+             <a routerLinkActive='active' routerLink="/usuarios" class="">
+               <button *ngIf="usuario.roles === 'superadmin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Usuarios</button>
+
+            </a>
+             <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarModal" data-whatever="@mdo">Agregar Vacantes</button>
 
 
             </div>
@@ -47,9 +51,9 @@
                           <label for="noticia"  class="col-form-label">Negocio:</label>
                           <input [(ngModel)]="usuario.negocio" name="noticia" ngModel type="text" class="form-control" id="noticia" disabled>
                         </div>
-                       
+
                         <form #myForm="ngForm" (ngSubmit)="crearNoticias(myForm.value)">
-                           
+
                             <div class="form-group">
                               <label for="anuncio" class="col-form-label">Descripción:</label>
                               <input [(ngModel)]="usuario.anuncio" name="anuncio" ngModel type="text" class="form-control" id="anuncio">
@@ -152,7 +156,7 @@
                   </h4>
                   <p class="blog-card-description"  >Nombre del empleo: {{vacante.empleo}}</p>
                   <p class="blog-card-description"  >Reuisitos: {{vacante.requisitos}}</p>
-                  <p class="blog-card-description"  >Horario: {{vacante.horario}}</p>
+                  <p class="blog-card-description"  >Horario: {{vacante.dias}}</p>
                   <p class="blog-card-description"  >Tiempo: {{vacante.tiempo}}</p>
                   <p class="blog-card-description"  >Ubicación: {{vacante.ubicacion}}</p>
               </div>
@@ -183,14 +187,14 @@
             <form  >
 
               <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"    required>
-              
+
                 <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
-                
 
 
 
 
-                
+
+
             <form #mForm="ngForm" (ngSubmit)="crearVacante(mForm.value)">
 
               <input type="text" [(ngModel)]="usuario.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
@@ -207,11 +211,14 @@
 
 
 
-
-              <input type="date" [(ngModel)]="usuario.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
-              <div *ngIf="horario.touched && !horario.valid">
-                  <div *ngIf="horario.errors.required" style="color: red">  Por favor ingrese el horario  </div>
-              </div>
+                <div>
+                  List:
+                  <ul>
+                    <li *ngFor="let usuario of device">
+                      <input type="checkbox" [(ngModel)]="usuario.checked"  name="checked" #checked="ngModel">{{usuario.name}}
+                    </li>
+                  </ul>
+                </div>
 
                 <div class="col">
                   <label for="advertence" style="color: red">*Por favor seleccione el tipo de trabajo </label>
@@ -222,7 +229,7 @@
                 </div>
             </form>
 
-              
+
             </form>
           </div>
           <div class="modal-footer">

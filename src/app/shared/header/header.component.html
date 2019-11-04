@@ -12,13 +12,14 @@
   <div id="sidebar" class="nav-collapse ">
     <!-- sidebar menu start-->
     <ul class="sidebar-menu">
+      <h4></h4>
       <li class="">
         <a routerLink="/perfil" class="">
                       <i class="icon_document_alt"></i>
                       <span>PERFIL</span>
                   </a>
       </li>
-      <li class="" *ngIf="roles == superadmin; else noUserAdmin">
+      <li class="" *ngIf="usuario.roles === 'superadmin'">
         <a routerLinkActive='active' routerLink="/usuarios" class="">
                       <i class="icon_documents_alt"></i>
                       <span>USUARIOS</span>

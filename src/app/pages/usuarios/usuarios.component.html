@@ -5,13 +5,17 @@
       <div class="row">
         <div class="col-lg-12">
           <h3 class="page-header"><i class="fa fa fa-bars"></i> USUARIOS</h3>
+
           <div class="nav search-row" id="top_menu">
+            <a routerLinkActive='active' routerLink="/perfil" class="">
+              <button type="button" class="btn btn-info">Regresar a Perfil</button>
+           </a> <br> <br>
             <!--  search form start -->
             <ul class="nav top-menu">
               <li>
                 <form class="navbar-form">
                   <input class="form-control" name="filterUsuario" placeholder="Buscar usuario" type="text" [(ngModel)]="filterUsuario">
-                </form>
+                </form> <br>
               </li>
             </ul>
             <!--  search form end -->
@@ -36,7 +40,7 @@
                             <div *ngIf="nombre.errors.required" style="color: red"> Por favor ingrese el nombre del negocio   </div>
                           </div>
 
-                       
+
 
 
                         <textarea [(ngModel)]="usuario.descripcion" name="mensaje" #mensaje="ngModel" placeholder="Descripcion" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
@@ -47,7 +51,7 @@
                           </div>
                       </div>
                     </div>
-                   
+
                     <div class="row">
                       <div class="col">
                         <input type="text" [(ngModel)]="usuario.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
@@ -61,7 +65,7 @@
 
 
                         <input type="text" [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-                        
+
 
 
 
@@ -74,7 +78,7 @@
                             <div *ngIf="email.errors.required" style="color: red">
                               Por favor ingrese un correo electrónico, el campo no debe de estar vacío
                             </div>
-                            
+
                           </div>
 
 
@@ -123,7 +127,7 @@
 
 
                       </div>
-                     
+
                       <div class="col">
                         <label for="advertence" style="color: red">*Seleccione tipo de usuario</label>
                         <select id="rol" name="rol" class="form-control" [(ngModel)]="usuario.roles" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
@@ -135,7 +139,7 @@
                     </div>
                     </form>
                 </div>
-                
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button  (click)="crearUsuario( usuario )" (click)="onRegister(usuario)" [disabled] ="myForm.invalid" type="button"   data-dismiss="modal" class="btn btn-primary">Agregar</button>
