@@ -77,15 +77,15 @@
   </section>
 
 
-  <section>
+  <section *ngIf="usuario.roles === 'admin' || usuario.roles === 'superadmin'">
     <h1>Publicaciones realizadas</h1>
     <div class="container" >
       <header>
         <h4>Apartado de NOTICIAS</h4>
       </header>
-      <div class="col" *ngFor="let noti of noticias" >
-        <div class="col-md-4">
-          <div class="blog-card blog-card-blog" *ngIf="usuario.id === 'id'" >
+      <div class="col"  >
+        <div class="col-md-4" *ngFor="let noti of noticias">
+          <div class="blog-card blog-card-blog">
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
                       <a href="#"  >{{noti.negocio}}</a>
@@ -143,12 +143,12 @@
       <header>
         <h4>Apartado de VACANTES</h4>
       </header>
-      <div class="col" *ngFor="let vacante of vacantes">
-        <div class="col-md-4">
-          <div class="blog-card blog-card-blog" *ngIf="noticia.negocio === 'negocio'">
+      <div class="col" >
+        <div class="col-md-4" *ngFor="let vacante of vacantes">
+          <div class="blog-card blog-card-blog" >
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
-                      <a href="#"  >La empresa {{vacante.negocio}}</a>
+                      <a href="#"  >La empresa {{vacante.negocio}} solicita:</a>
                   </h4>
                   <p class="blog-card-description"  >Nombre del empleo: {{vacante.empleo}}</p>
                   <p class="blog-card-description"  >Requisitos: {{vacante.requisitos}}</p>
@@ -182,16 +182,12 @@
 
             <form  >
 
-<<<<<<< HEAD
+
               <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"    required>
 
                 <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
-=======
-              <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
 
-                <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
 
->>>>>>> auth
 
 
 
@@ -211,25 +207,19 @@
               <div *ngIf="mensaje.touched && !mensaje.valid">
                   <div *ngIf="mensaje.errors.required" style="color: red">   Por favor ingrese los requisitos </div>
                 </div>
+<!--
 
 
 
-<<<<<<< HEAD
-                <div>
-                  List:
-                  <ul>
-                    <li *ngFor="let usuario of device">
-                      <input type="checkbox" [(ngModel)]="usuario.checked"  name="checked" #checked="ngModel">{{usuario.name}}
-                    </li>
-                  </ul>
-                </div>
-=======
 
-              <input type="date" [(ngModel)]="usuario.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-              <div *ngIf="horario.touched && !horario.valid">
-                  <div *ngIf="horario.errors.required" style="color: red">  Por favor ingrese el horario  </div>
-              </div>
->>>>>>> auth
+                <div class="col">
+                  <label for="advertence" style="color: red">*Por favor seleccione el tipo de trabajo </label>
+                  <select id="tiempo" name="tiempo" class="form-control" placeholder="Tipo" [(ngModel)]="usuario.dias" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
+                    <option value="Lunes-Viernes">Lunes-Viernes</option>
+                    <option value="Fines de semana">Fines de semana</option>
+                    <option value="Entre semana">Entre semana</option>
+                  </select>
+                </div> -->
 
                 <div class="col">
                   <label for="advertence" style="color: red">*Por favor seleccione el tipo de trabajo </label>
@@ -297,11 +287,13 @@
 
 
 
-                <input type="text" [(ngModel)]="vacante.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-                <div *ngIf="horario.touched && !horario.valid">
-                    <div *ngIf="horario.errors.required" style="color: red">
-                      Por favor ingrese el horario, el campo no debe de estar vacío
-                    </div>
+                  <div class="col">
+                    <label for="advertence" style="color: red">*Seleccione el dia a trabajar</label>
+                    <select id="rol" name="rol" class="form-control" [(ngModel)]="usuario.roles" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
+                      <option value="Fines de semana">Fines de Semana</option>
+                      <option value="Toda la semana">Toda la semana</option>
+                      <option value="Entre semana">Entre semana</option>
+                    </select>
                   </div>
 
 

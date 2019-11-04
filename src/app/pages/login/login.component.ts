@@ -84,16 +84,7 @@ export class LoginComponent implements OnInit {
       // }
       //
       // this.router.navigateByUrl('/perfil');
-      const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-           })
 
-        Toast.fire({
-          type: 'success',
-          title: 'Ha ingresado correctamente'
-        })
     },
     error => console.log(error)
   );
@@ -157,7 +148,7 @@ export class LoginComponent implements OnInit {
   nuevoLogin(form: NgForm) {
     if (form.invalid) {
       Swal.fire({
-        title: '¿Está seguro de eliminar el usuario?',
+        title: 'El usuario y/o contraseña, son incorrectos',
         text: "Una vez eliminado el usuario, no podrás recuperarlo",
         type: 'warning',
       });
@@ -180,6 +171,16 @@ export class LoginComponent implements OnInit {
       this.servicioUsuarios.setUser(this.user);
       const token = this.user.id;
       this.servicioUsuarios.setToken(token);
+      const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+           })
+
+        Toast.fire({
+          type: 'success',
+          title: 'Ha ingresado correctamente'
+        })
     } else {
       console.log('mandamos un mensaje para verificar los datos');
     }
