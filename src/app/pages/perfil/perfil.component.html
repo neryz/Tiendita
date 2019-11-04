@@ -186,9 +186,16 @@
 
             <form  >
 
+<<<<<<< HEAD
               <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"    required>
 
                 <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
+=======
+              <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+              
+                <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                
+>>>>>>> auth
 
 
 
@@ -197,20 +204,21 @@
 
             <form #mForm="ngForm" (ngSubmit)="crearVacante(mForm.value)">
 
-              <input type="text" [(ngModel)]="usuario.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
+              <input type="text" [(ngModel)]="usuario.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
               <div *ngIf="empleo.touched && !empleo.valid">
                   <div *ngIf="empleo.errors.required" style="color: red">  Por favor ingrese el empleo a cubrir </div>
               </div>
 
 
 
-              <textarea [(ngModel)]="usuario.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required></textarea>
+              <textarea [(ngModel)]="usuario.requisitos" name="mensaje" #mensaje="ngModel" placeholder="Escriba aquí sus requisitos" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required></textarea>
               <div *ngIf="mensaje.touched && !mensaje.valid">
                   <div *ngIf="mensaje.errors.required" style="color: red">   Por favor ingrese los requisitos </div>
                 </div>
 
 
 
+<<<<<<< HEAD
                 <div>
                   List:
                   <ul>
@@ -219,6 +227,13 @@
                     </li>
                   </ul>
                 </div>
+=======
+
+              <input type="date" [(ngModel)]="usuario.horario" name="horario" #horario="ngModel" placeholder="Horario" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+              <div *ngIf="horario.touched && !horario.valid">
+                  <div *ngIf="horario.errors.required" style="color: red">  Por favor ingrese el horario  </div>
+              </div>
+>>>>>>> auth
 
                 <div class="col">
                   <label for="advertence" style="color: red">*Por favor seleccione el tipo de trabajo </label>
