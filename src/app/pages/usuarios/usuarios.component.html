@@ -7,9 +7,6 @@
           <h3 class="page-header"><i class="fa fa fa-bars"></i> USUARIOS</h3>
 
           <div class="nav search-row" id="top_menu">
-            <a routerLinkActive='active' routerLink="/perfil" class="">
-              <button type="button" class="btn btn-info">Regresar a Perfil</button>
-           </a> <br> <br>
             <!--  search form start -->
             <ul class="nav top-menu">
               <li>
@@ -64,7 +61,7 @@
 
 
 
-                        <input type="text" [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+                        <input type="text" disabled [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
 
 
 
@@ -78,14 +75,10 @@
                             <div *ngIf="email.errors.required" style="color: red">
                               Por favor ingrese un correo electrónico, el campo no debe de estar vacío
                             </div>
-<<<<<<< HEAD
-
-=======
                             <div *ngIf="email.errors.email" style="color: red">
                               Por favor ingrese un correo electrónico válido
                             </div>
->>>>>>> auth
-                          </div>
+          </div>
 
 
 
@@ -119,16 +112,16 @@
 
 
 
-                        <input type="text" [(ngModel)]="usuario.telefono" name="telefono" #telefono="ngModel" placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="12" maxlength="13"  required  >
+                        <input type="text" pInputText (keypress)="onlyNumberKey($event)" [(ngModel)]="usuario.telefono" name="telefono" #telefono="ngModel" placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="10" maxlength="10"  required  >
                         <div *ngIf="telefono.touched && !telefono.valid">
                             <div *ngIf="telefono.errors.required" style="color: red">
                               Por favor ingrese un número de teléfono, el campo no debe de estar vacío
                             </div>
-                            
+
                               <div *ngIf="telefono.errors.minlength" style="color: red">
                                 Por favor ingrese un número de teléfono válido
                               </div>
-                             
+
                           </div>
 
 

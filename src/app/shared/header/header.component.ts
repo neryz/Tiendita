@@ -79,6 +79,8 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit() {
     this.getUsuarios();
+    this.usuario = this.servicioUsuarios.getCurrentUser();
+    console.log(this.usuario);
     // this.getCurrentUser();
     // this.getCurrentSuperAdmin();
 

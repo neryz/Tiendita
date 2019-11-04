@@ -24,11 +24,7 @@
               <p>{{usuario.descripcion}}</p>
              </div>
 
-             <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button>
-             <a routerLinkActive='active' routerLink="/usuarios" class="">
-               <button *ngIf="usuario.roles === 'superadmin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Usuarios</button>
-
-            </a>
+             <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button> <br> <br> <br>
              <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarModal" data-whatever="@mdo">Agregar Vacantes</button>
 
 
@@ -89,7 +85,7 @@
       </header>
       <div class="col" *ngFor="let noti of noticias" >
         <div class="col-md-4">
-          <div class="blog-card blog-card-blog" *ngIf="noti.userUid == userUid; else noOwner" >
+          <div class="blog-card blog-card-blog" *ngIf="usuario.id === 'id'" >
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
                       <a href="#"  >{{noti.negocio}}</a>
@@ -149,13 +145,13 @@
       </header>
       <div class="col" *ngFor="let vacante of vacantes">
         <div class="col-md-4">
-          <div class="blog-card blog-card-blog">
+          <div class="blog-card blog-card-blog" *ngIf="noticia.negocio === 'negocio'">
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
-                      <a href="#"  >{{vacante.negocio}}</a>
+                      <a href="#"  >La empresa {{vacante.negocio}}</a>
                   </h4>
                   <p class="blog-card-description"  >Nombre del empleo: {{vacante.empleo}}</p>
-                  <p class="blog-card-description"  >Reuisitos: {{vacante.requisitos}}</p>
+                  <p class="blog-card-description"  >Requisitos: {{vacante.requisitos}}</p>
                   <p class="blog-card-description"  >Horario: {{vacante.dias}}</p>
                   <p class="blog-card-description"  >Tiempo: {{vacante.tiempo}}</p>
                   <p class="blog-card-description"  >Ubicación: {{vacante.ubicacion}}</p>
@@ -192,9 +188,9 @@
                 <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"  required>
 =======
               <input type="text" [(ngModel)]="usuario.negocio" disabled    name="negocio" #negocio="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-              
+
                 <input type="text" [(ngModel)]="usuario.ubicacion" disabled name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
-                
+
 >>>>>>> auth
 
 
