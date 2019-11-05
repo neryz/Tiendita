@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UsuarioService} from 'src/app/services/usuarios.service';
 import {UsuarioModel} from 'src/app/models/usuario.model';
+import {NoticiasModel} from 'src/app/models/noticias.model';
 import { FormControl } from '@angular/forms';
 import {AngularFireAuth} from "@angular/fire/auth";
 import {VacantesService} from 'src/app/services/vacantes.service';
@@ -23,10 +24,14 @@ export class HomeComponent implements OnInit {
   vacante: VacanteModel = new VacanteModel();
   // array con nombre vacantes de
   vacantes: VacanteModel [] = [];
+
+  noticias: NoticiasModel [] = [];
+  noticia: NoticiasModel = new NoticiasModel();
+
   constructor(private servicioUsuarios: UsuarioService, private servicioVacantes: VacantesService, private router: Router) {}
+// Apartado de funciones para obtner
   getUsuarios (){
     this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
-      console.log(respuesta);
       this.usuarios = respuesta;
     });
   }
@@ -36,12 +41,19 @@ export class HomeComponent implements OnInit {
       this.vacantes = respuesta;
     });
   }
+  getNoticias (){
+    this.servicioUsuarios.getNoticias().subscribe(respuesta => {
+      console.log(respuesta);
+      this.noticias = respuesta;
+    });
+  }
   verUsuario (usuario: any){
     this.categoria = usuario;
   }
   ngOnInit() {
     this.getUsuarios();
     this.getVacantes();
+    this.getNoticias();
   }
   // negocioCategoria(negocio: string){
   //   this.negocios = this.servicioUsuarios.getCategoria(negocio);

@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { UsuarioModel } from '../models/usuario.model';
+import { NoticiasModel } from '../models/noticias.model';
+import { UserInterface } from '../models/usuario.model';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
+import {Observable, BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
+import { isNullOrUndefined } from "util";
+
 import { AngularFireAuth } from '@angular/fire/auth';
 import { VacanteModel } from '../models/vacantes.model';
+import {Router} from "@angular/router";
+import { User } from '../shared/user.class';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +20,14 @@ export class UsuarioService {
   private prodCollection: AngularFirestoreCollection<any>;
   private usuarios: Observable<any[]>;
 
+  private notCollection: AngularFirestoreCollection<any>;
+  private noticias: Observable<any[]>;
+
   usDoc: AngularFirestoreDocument<any>;
   usuario: Observable<any>;
+
+  notDoc: AngularFirestoreDocument<any>;
+  noticia: Observable<any>;
 
   vacDoc: AngularFirestoreDocument<any>;
   Vacante: Observable<any>;
@@ -22,20 +35,76 @@ export class UsuarioService {
   public selected: any = {
     id: null
   };
+
+  user: UsuarioModel;
   private url = 'https://tiendita-92412.firebaseio.com/';
 
-  constructor( private afs: AngularFirestore, private afsAuth: AngularFireAuth) {
+  constructor( private afs: AngularFirestore, public afsAuth: AngularFireAuth, private router: Router) {
 
     this.prodCollection = afs.collection<any>('Usuarios');
     this.usuarios = this.prodCollection.valueChanges();
 
+    this.notCollection = afs.collection<any>('noticias');
+    this.noticias = this.prodCollection.valueChanges();
+
   }
 
-  crearUsuario(usuario: UsuarioModel) {
-    this.prodCollection.add({...usuario}).then( resp => {
-    });
-    console.log(usuario);
-  }
+  // registerUser(email: string, pass: string) {
+  //     return new Promise((resolve, reject) => {
+  //       this.afsAuth.auth.createUserWithEmailAndPassword(email, pass)
+  //     });
+  //   }
+
+    async onRegister (usuario: UsuarioModel){
+      try {
+        return new Promise((resolve, reject) => {
+          this.afsAuth.auth.createUserWithEmailAndPassword(
+            usuario.email,
+            usuario.password,
+          );
+        });
+      }catch (error){
+        console.log('Error on registrer user', error);
+      }
+    }
+
+    crearUsuario(usuario: UsuarioModel){
+      this.prodCollection.add({...usuario}).then( resp => {
+      });
+      console.log(usuario)
+    }
+
+    crearNoticias(noticia: NoticiasModel){
+
+      this.notCollection.add({...noticia}).then( resp => {
+      });
+      console.log(noticia)
+    }
+
+    // private updateUserData (user) {
+    //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    //   const data: UserInterface = {
+    //     id: user.uid,
+    //     email: user.email,
+    //     roles: {
+    //       admin: true
+    //     }
+    //   }
+    //   return userRef.set(data, {merge: true})
+    // }
+    getCurrentUser(): UsuarioModel {
+      // localStorage.setItem ('usuario', JSON.stringify(this.usuario) );
+      let usuario_string = localStorage.getItem("usuario");
+      if (!isNullOrUndefined(usuario_string)) {
+        let usuario: UsuarioModel = JSON.parse(usuario_string);
+        return usuario;
+      } else {
+        return null;
+      }
+    }
+
+
+
   getUsuarios (){
     return this.usuario = this.prodCollection.snapshotChanges()
     .pipe( map( cambios => {
@@ -47,6 +116,19 @@ export class UsuarioService {
     }));
     console.log();
   }
+
+  getNoticias (){
+    return this.noticia = this.notCollection.snapshotChanges()
+    .pipe( map( cambios => {
+      return cambios.map( accion => {
+        const data = accion.payload.doc.data() as any;
+        data.id = accion.payload.doc.id;
+        return data;
+      });
+    }));
+    console.log();
+  }
+
   getVacantes (){
     return this.Vacante = this.prodCollection.snapshotChanges()
     .pipe( map( cambios => {
@@ -67,12 +149,29 @@ export class UsuarioService {
     });
     console.log(usuario);
   }
+
+  editarNoticia (noticia: NoticiasModel){
+    const idnoticia = noticia.id;
+    this.notDoc = this.afs.doc<any>(`noticias/${idnoticia}`);
+    this.notDoc.update(noticia).then( resp => {
+    });
+    console.log(noticia);
+  }
+
   eliminarUsuarios (idusuario: UsuarioModel) {
     this.usDoc = this.afs.doc<any>(`Usuarios/${idusuario.id}`);
     this.usDoc.delete();
     console.log();
 
   }
+
+  eliminarNoticia (idnoticia: NoticiasModel) {
+    this.notDoc = this.afs.doc<any>(`noticias/${idnoticia.id}`);
+    this.notDoc.delete();
+    console.log();
+
+  }
+
   getCategoriasFilter(filtro: string){
     this.usDoc = this.afs.doc<any>(`/Usuarios`),{
       query: {
@@ -92,7 +191,29 @@ export class UsuarioService {
     }
     return this.usDoc;
   }
+  isUserAdmin (userUid){
+    return this.afs.doc<UsuarioModel>(`Usuarios/${userUid}`).valueChanges();
+  }
 
+  isSuperAdmin (userUid){
+    return this.afs.doc<UsuarioModel>(`Usuarios/${userUid}`).valueChanges();
+  }
+
+  setUser(usuario: UsuarioModel): void {
+  let usuario_string = JSON.stringify(usuario);
+  localStorage.setItem("currentUser", usuario_string);
+}
+
+  setToken(token): void {
+    localStorage.setItem("accessToken", token);
+  }
+
+  getToken() {
+    return localStorage.getItem("accessToken");
+  }
+  isAuth() {
+   return this.afsAuth.authState.pipe(map(auth => auth));
+ }
   // getCategoria(negocio: string){
   //   let categorias = this.getUsuarios();
   //   let categoria = categorias.filter( item => item.negocio == negocio)

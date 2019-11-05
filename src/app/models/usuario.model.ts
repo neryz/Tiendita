@@ -1,20 +1,29 @@
 export interface Roles {
-  client: boolean;
-  admin: boolean;
-  superadmin: boolean;
+  client?: boolean;
+  admin?: boolean;
+  superadmin?: boolean;
 }
 
 export class UsuarioModel{
   id:string;
-  userUid: string;
+  email: string;
+  negocio:string;
+  password: string;
+  descripcion: string;
+  anuncio: string;
+  ubicacion: string;
+  empleo: string;
+  tiempo: string;
+  requisitos: string;
+  rfc:string;
+  numero:string;
+  telefono:string;
+  tipo:string;
+  roles: string;
+}
+
+export interface UserInterface {
   email: string;
   password: string;
-    RFC:string;
-    negocio:string;
-  numero:string;
-  telefono:number;
-  tipo:string;
-  Email:string;
-  contraseña:string;
-  opciones:string;
+
 }
