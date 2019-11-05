@@ -16,12 +16,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ContrasenniaComponent } from './componentes/contrasennia/contrasennia.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { VacantesComponent } from './pages/vacantes/vacantes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { FilterPipe } from './pipes/filter.pipe';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     VacantesComponent,
     UsuariosComponent,
     AgregarComponent,
+    ContrasenniaComponent,
     FilterPipe,
   ],
   imports: [
@@ -44,7 +45,6 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent]

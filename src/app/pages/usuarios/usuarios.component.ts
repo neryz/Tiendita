@@ -41,7 +41,7 @@ export class UsuariosComponent implements OnInit {
       public userUid: string = null;
 
       onlyNumberKey(event) {
-          return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57; 
+          return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
       }
   // crearVacante -> es una funcion en donde le indico que mandaré datos al crearVacante de la funcion servicioVacantes
     eliminarUsuarios(usuario: UsuarioModel){

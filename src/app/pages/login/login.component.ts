@@ -43,17 +43,7 @@ export class LoginComponent implements OnInit {
     // );
   }
 
-  private user: UsuarioModel = {
-    id:'',
-    email: '',
-    negocio:'',
-    password: '',
-    RFC:'',
-    numero:'',
-    telefono:'',
-    tipo:'',
-    roles: ''
-};
+  private user: UsuarioModel;
 
   public isError = false;
 

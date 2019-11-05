@@ -105,9 +105,9 @@ export class PerfilComponent implements OnInit {
   //   })
   // }
 
-  crearVacante(vacante: VacanteModel){
+  crearUsuario(usuario: UsuarioModel){
     console.log('Voy a crear al vacante: ');
-    this.servicioVacantes.crearVacante( vacante );
+    this.servicioUsuarios.crearUsuario( usuario );
     this.formValue.resetForm();
     Swal.fire({
       title: 'Vacante creada!',

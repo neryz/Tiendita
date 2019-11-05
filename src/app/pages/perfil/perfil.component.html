@@ -194,7 +194,7 @@
 
 
 
-            <form #mForm="ngForm" (ngSubmit)="crearVacante(mForm.value)">
+            <form #mForm="ngForm" (ngSubmit)="crearUsuario(mForm.value)">
 
               <input type="text" [(ngModel)]="usuario.empleo" name="empleo" #empleo="ngModel" placeholder="Nombre del empleo" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
               <div *ngIf="empleo.touched && !empleo.valid">
@@ -235,7 +235,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button (click)=" crearVacante(usuario)"  type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="mForm.invalid">Agregar</button>
+            <button (click)=" crearUsuario(usuario)"  type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="mForm.invalid">Agregar</button>
           </div>
         </div>
       </div>

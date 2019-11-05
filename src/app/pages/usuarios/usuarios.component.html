@@ -29,7 +29,7 @@
                   <h5 class="modal-title" id="exampleModalLabel">AGREGAR USUARIO</h5>
                 </div>
                 <div class="modal-body">
-                    <form #myForm="ngForm" (ngSubmit)="submitForm(myForm.value)">
+                    <form #myForm="ngForm" (ngSubmit)="crearUsuario(myForm.value)">
                     <div class="row ">
                       <div class="col">
                         <input type="text" id="recipient-name" [(ngModel)]="usuario.negocio" name="nombre" #nombre="ngModel" placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" required>
@@ -99,13 +99,13 @@
                     </div>
                     <div class="row">
                       <div class="col">
-                        <input type="text" [(ngModel)]="usuario.RFC" name="RFC" #RFC="ngModel" placeholder="RFC" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="12" maxlength="13" required>
-                        <div *ngIf="RFC.touched && !RFC.valid">
-                            <div *ngIf="RFC.errors.required" style="color: red">
-                              Por favor ingrese su RFC
+                        <input type="text" [(ngModel)]="usuario.rfc" name="rfc" #rfc="ngModel" placeholder="rfc" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;" minlength="12" maxlength="13" required>
+                        <div *ngIf="rfc.touched && !rfc.valid">
+                            <div *ngIf="rfc.errors.required" style="color: red">
+                              Por favor ingrese su rfc
                             </div>
-                            <div *ngIf="RFC.errors.minlength" style="color: red">
-                                Por favor un RFC válido
+                            <div *ngIf="rfc.errors.minlength" style="color: red">
+                                Por favor un rfc válido
                               </div>
                           </div>
 
@@ -143,7 +143,7 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button  (click)="crearUsuario( usuario )" (click)="onRegister(usuario)" [disabled] ="myForm.invalid" type="button"   data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                  <button  (click)="crearUsuario( usuario )" [disabled] ="myForm.invalid" type="button"   data-dismiss="modal" class="btn btn-primary">Agregar</button>
                 </div>
               </div>
             </div>
@@ -169,7 +169,6 @@
             <div class="row ">
               <div class="col">
                 <input type="text" [(ngModel)]="usuario.negocio" nombre="negocio" ngModel placeholder="Nombre del negocio" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                <input type="text" [(ngModel)]="usuario.contacto" nombre="contacto" ngModel placeholder="Contacto" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
                 <textarea [(ngModel)]="usuario.descripcion" nombre="mensaje" ngModel placeholder="Descripcion" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"></textarea>
               </div>
             </div>
@@ -178,7 +177,6 @@
             <div class="row">
               <div class="col">
                 <input type="text" [(ngModel)]="usuario.ubicacion" nombre="ubicacion" ngModel placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
-                <input type="text" [(ngModel)]="usuario.fecha" nombre="fecha" ngModel placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
               </div>
             </div>
             <div class="row">
@@ -189,7 +187,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <input type="text" [(ngModel)]="usuario.rfc" nombre="rfc" ngModel placeholder="RFC" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 33%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
+                <input type="text" [(ngModel)]="usuario.rfc" nombre="rfc" ngModel placeholder="rfc" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 33%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
                 <input type="text" [(ngModel)]="usuario.telefono" nombre="telefono" ngModel placeholder="Telefono" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 33%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
                 <input type="text" [(ngModel)]="usuario.tipo" nombre="categoria" ngModel placeholder="Categoria" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #138D75; width: 33%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;">
               </div>
@@ -220,7 +218,7 @@
                         <th>Email</th>
                         <th>Contraseña</th>
                         <th class="max-width">Negocio</th>
-                        <th>RFC</th>
+                        <th>rfc</th>
                         <th>Categoria</th>
                         <th>Rol</th>
                         <th class="sortable">Teléfono</th>
@@ -232,7 +230,7 @@
                         <td class="text-nowrap align-middle">{{usu.email}}</td>
                         <td class="text-nowrap align-middle"><span>{{usu.password}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.negocio}}</span></td>
-                        <td class="text-nowrap align-middle"><span>{{usu.RFC}}</span></td>
+                        <td class="text-nowrap align-middle"><span>{{usu.rfc}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.categoria}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.roles}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.telefono}}</span></td>
