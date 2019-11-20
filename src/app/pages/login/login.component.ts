@@ -9,8 +9,6 @@ import { isError } from 'util';
 import { map, switchMap } from 'rxjs/operators';
 import {UsuarioModel} from 'src/app/models/usuario.model';
 import {UserInterface} from 'src/app/models/usuario.model';
-import { AngularFireAuth } from '@angular/fire/auth';
-
 
 import { isNullOrUndefined } from "util";
 import { Observable, BehaviorSubject, combineLatest} from 'rxjs';
@@ -28,7 +26,7 @@ export class LoginComponent implements OnInit {
   usuario: UsuarioModel = new UsuarioModel();
   usuarios: UsuarioModel [] = [];
 
-  constructor(private auth: AuthService, private servicioUsuarios: UsuarioService, private servicioLogin: LoginService, private router: Router, private afs: AngularFirestore) {
+  constructor(private servicioUsuarios: UsuarioService, private servicioLogin: LoginService, private router: Router, private afs: AngularFirestore) {
     // this.emailFilter$ = new BehaviorSubject(null);
     // this.usuarios = combineLatest(
     //   this.emailFilter$,
