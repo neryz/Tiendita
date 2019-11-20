@@ -47,39 +47,6 @@ export class LoginComponent implements OnInit {
 
   public isError = false;
 
-  onLogin (form: NgForm) {
-    if (form.invalid) {
-      Swal.fire({
-        title: '¿Está seguro de eliminar el usuario?',
-        text: "Una vez eliminado el usuario, no podrás recuperarlo",
-        type: 'warning',
-      });
-    }
-
-    if (form.invalid) {return;} console.log(this.usuario);
-    this.auth.login(this.usuario)
-    .subscribe(
-      data => {
-        console.log(this.usuario);
-        this.afs.collection('usuario', ref => ref.where('Usuario', '==', 'email'))
-        // this.servicioUsuarios.setUser(this.usuario);
-        // const token = this.usuario.id;
-        // this.servicioUsuarios.setToken(token);
-        // this.auth.setUser(usuario);
-        // const token = data.id;
-        // this.auth.setToken(token);
-        // this.auth.setUser(data.this.usuario);
-              // if (this.recordarme) {
-      //   localStorage.setItem ('email', this.usuario['email']);
-      // }
-      //
-      // this.router.navigateByUrl('/perfil');
-
-    },
-    error => console.log(error)
-  );
-  }
-
   //
   //
   //   onLogin(form: NgForm) {
