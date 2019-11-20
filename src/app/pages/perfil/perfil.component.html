@@ -24,7 +24,7 @@
               <p>{{usuario.descripcion}}</p>
              </div>
 
-             <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button> <br> <br> <br>
+             <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button> <br> <br>
              <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarModal" data-whatever="@mdo">Agregar Vacantes</button>
 
 
@@ -144,21 +144,20 @@
         <h4>Apartado de VACANTES</h4>
       </header>
       <div class="col" >
-        <div class="col-md-4" *ngFor="let vacante of vacantes">
+        <div class="col-md-4" *ngFor="let usuario of usuarios">
           <div class="blog-card blog-card-blog" >
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
-                      <a href="#"  >La empresa {{vacante.negocio}} solicita:</a>
+                      <a href="#"  >La empresa {{usuario.negocio}} solicita:</a>
                   </h4>
-                  <p class="blog-card-description"  >Nombre del empleo: {{vacante.empleo}}</p>
-                  <p class="blog-card-description"  >Requisitos: {{vacante.requisitos}}</p>
-                  <p class="blog-card-description"  >Horario: {{vacante.dias}}</p>
-                  <p class="blog-card-description"  >Tiempo: {{vacante.tiempo}}</p>
-                  <p class="blog-card-description"  >Ubicación: {{vacante.ubicacion}}</p>
+                  <p class="blog-card-description"  >Nombre del empleo: {{usuario.empleo}}</p>
+                  <p class="blog-card-description"  >Requisitos: {{usuario.requisitos}}</p>
+                  <p class="blog-card-description"  >Tiempo: {{usuario.tiempo}}</p>
+                  <p class="blog-card-description"  >Ubicación: {{usuario.ubicacion}}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" (click)="verVacante(vacante, editarModal)" class="btn btn-success" data-toggle="modal" data-target="#editarModal" data-whatever="@mdo">Editar</button>
-                <button type="button" (click)="eliminarVacantes(vacante)" class="btn btn-danger" >Eliminar</button>
+                <button type="button" (click)="eliminarUsuarios(usuario)" class="btn btn-danger" >Eliminar</button>
               </div>
           </div>
         </div>

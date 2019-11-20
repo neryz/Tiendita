@@ -13,17 +13,16 @@
 <!-- Page Content -->
 <h1>Vacantes disponibles</h1>
 <div class="container" >
-  <div class="col" *ngFor="let vacante of vacantes">
+  <div class="col" *ngFor="let usuario of usuarios">
     <div class="col-md-4">
       <div class="blog-card blog-card-blog">
           <div class="blog-table" >
               <h4 class="blog-card-caption">
-                  <a href="#"  >{{vacante.negocio}} solicita:</a>
+                  <a href="#"  >{{usuario.negocio}} solicita:</a>
               </h4>
-              <p class="blog-card-description"  >Empleo: {{vacante.empleo}}</p>
-              <p class="blog-card-description"  >Requisitos: {{vacante.requisitos}}</p>
-              <p class="blog-card-description"  >Horario: {{vacante.horario}}</p>
-              <p class="blog-card-description"  >Ubicación: {{vacante.ubicacion}}</p>
+              <p class="blog-card-description"  >Empleo: {{usuario.empleo}}</p>
+              <p class="blog-card-description"  >Requisitos: {{usuario.requisitos}}</p>
+              <p class="blog-card-description"  >Ubicación: {{usuario.ubicacion}}</p>
           </div>
       </div>
     </div>

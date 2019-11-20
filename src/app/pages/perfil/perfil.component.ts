@@ -151,7 +151,7 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  eliminarVacantes (vacantes: VacanteModel){
+  eliminarUsuarios (usuario: UsuarioModel){
     Swal.fire({
       title: '¿Está seguro de eliminar la noticias?',
       text: "Una vez eliminado la noticia, no podrás recuperarlo",
@@ -163,7 +163,7 @@ export class PerfilComponent implements OnInit {
     }) .then((result) =>  {
 
       if (result.value) {
-        this.servicioVacantes.eliminarVacantes(vacantes);
+        this.servicioUsuarios.eliminarUsuarios(usuario);
         Swal.fire(
           'Eliminado satisfactoriamente!',
           'La noticia ha sido eliminado',

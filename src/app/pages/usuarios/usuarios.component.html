@@ -29,6 +29,9 @@
                   <h5 class="modal-title" id="exampleModalLabel">AGREGAR USUARIO</h5>
                 </div>
                 <div class="modal-body">
+
+
+
                     <form #myForm="ngForm" (ngSubmit)="crearUsuario(myForm.value)">
                     <div class="row ">
                       <div class="col">
@@ -61,7 +64,7 @@
 
 
 
-                        <input type="text" disabled [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+
 
 
 
@@ -123,6 +126,12 @@
                               </div>
 
                           </div>
+
+
+                          <form>
+                          <input type="text" disabled [(ngModel)]="aHourMoment" name="fecha" #fecha="ngModel" placeholder="Fecha" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 50%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
+
+                            </form>
 
 
 
@@ -231,7 +240,6 @@
                         <td class="text-nowrap align-middle"><span>{{usu.password}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.negocio}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.rfc}}</span></td>
-                        <td class="text-nowrap align-middle"><span>{{usu.categoria}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.roles}}</span></td>
                         <td class="text-nowrap align-middle"><span>{{usu.telefono}}</span></td>
                         <td class="text-center align-middle">

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     // );
   }
 
-  private user: UsuarioModel;
+  // private usuario: UsuarioModel;
 
   public isError = false;
 
@@ -56,14 +56,14 @@ export class LoginComponent implements OnInit {
       });
     }
 
-    if (form.invalid) {return;} console.log(this.user);
-    this.auth.login(this.user)
+    if (form.invalid) {return;} console.log(this.usuario);
+    this.auth.login(this.usuario)
     .subscribe(
       data => {
-        console.log(this.user);
-        this.afs.collection('user', ref => ref.where('Usuario', '==', 'email'))
-        // this.servicioUsuarios.setUser(this.user);
-        // const token = this.user.id;
+        console.log(this.usuario);
+        this.afs.collection('usuario', ref => ref.where('Usuario', '==', 'email'))
+        // this.servicioUsuarios.setUser(this.usuario);
+        // const token = this.usuario.id;
         // this.servicioUsuarios.setToken(token);
         // this.auth.setUser(usuario);
         // const token = data.id;
@@ -85,11 +85,11 @@ export class LoginComponent implements OnInit {
   //   onLogin(form: NgForm) {
   //   if (form.valid) {
   //     return this.auth
-  //       .loginuser(this.usuario)
+  //       .loginusuario(this.usuario)
   //       .subscribe(
   //       data => {
   //         console.log(data.usuario);
-  //         this.auth.setUser(data.user);
+  //         this.auth.setUser(data.usuario);
   //         const token = data.id;
   //         this.auth.setToken(token);
   //         // this.router.navigateByUrl('/perfil');
@@ -125,9 +125,9 @@ export class LoginComponent implements OnInit {
       console.log('obtenidos->', usuarios)
       this.usuarios = usuarios;
     });
-    // this.servicioLogin.getUser().subscribe((userSnapshot) => {
+    // this.servicioLogin.getUser().subscribe((usuarioSnapshot) => {
     //   this.usuarios = [];
-    //   userSnapshot.forEach((usuario: UsuarioModel) => {
+    //   usuarioSnapshot.forEach((usuario: UsuarioModel) => {
     //     this.usuarios.push({
     //       email: usuario.payload.doc.email,
     //     });
@@ -143,10 +143,10 @@ export class LoginComponent implements OnInit {
         type: 'warning',
       });
     }
-    if (form.invalid) {return;} console.log(this.user);
+    if (form.invalid) {return;} console.log(this.usuario);
     let existe = false;
     for(let i = 0; i < this.usuarios.length; i++){
-      if( this.usuarios[i].email === this.user.email ) {
+      if( this.usuarios[i].email === this.usuario.email ) {
         console.log('encontrado');
         this.usuario = this.usuarios[i];
         existe= true;
@@ -158,8 +158,8 @@ export class LoginComponent implements OnInit {
       console.log('mandamos a otra pagina');
       localStorage.setItem ('usuario', JSON.stringify(this.usuario) );
       this.router.navigateByUrl('/perfil');
-      this.servicioUsuarios.setUser(this.user);
-      const token = this.user.id;
+      this.servicioUsuarios.setUser(this.usuario);
+      const token = this.usuario.id;
       this.servicioUsuarios.setToken(token);
       const Toast = Swal.mixin({
           toast: true,
