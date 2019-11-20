@@ -8,6 +8,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import {environment} from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +45,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
   ],
