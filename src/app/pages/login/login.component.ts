@@ -14,7 +14,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { isNullOrUndefined } from "util";
 import { Observable, BehaviorSubject, combineLatest} from 'rxjs';
-// import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
