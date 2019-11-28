@@ -26,10 +26,10 @@ export class VacantesComponent implements OnInit {
     crearVacante( vacante: VacanteModel ){
       this.servicioVacantes.crearVacante( vacante );
     }
-    getUsuarios (){
-      this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
+    getVacantes (){
+      this.servicioVacantes.getVacantes().subscribe(respuesta => {
         console.log(respuesta);
-        this.usuarios = respuesta;
+        this.vacantes = respuesta;
       });
     }
     editarVacantes (vacante: VacanteModel){
@@ -41,7 +41,7 @@ export class VacantesComponent implements OnInit {
     // This -> es una variable global de mi clase
     // termina
   ngOnInit() {
-     this.getUsuarios();
+     this.getVacantes();
   }
 
 }

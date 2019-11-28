@@ -128,6 +128,17 @@ export class PerfilComponent implements OnInit {
       });
     }
 
+    crearVacante( vacante: VacanteModel ){
+      this.servicioUsuarios.crearVacante( vacante );
+      this.formValues.resetForm();
+      Swal.fire({
+        title: 'Agregado!',
+        text: 'El proceso se ha realizado con éxito',
+        type: 'success',
+        confirmButtonText: 'OK'
+      });
+    }
+
 
   eliminarNoticia(noticia: NoticiasModel){
     Swal.fire({
@@ -164,6 +175,28 @@ export class PerfilComponent implements OnInit {
 
       if (result.value) {
         this.servicioUsuarios.eliminarUsuarios(usuario);
+        Swal.fire(
+          'Eliminado satisfactoriamente!',
+          'La noticia ha sido eliminado',
+          'success'
+        )
+      }
+    });
+  }
+
+  eliminarVacante (vacante: VacanteModel){
+    Swal.fire({
+      title: '¿Está seguro de eliminar la noticias?',
+      text: "Una vez eliminado la noticia, no podrás recuperarlo",
+      type: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#d33 ',
+      confirmButtonText: 'Eliminar'
+    }) .then((result) =>  {
+
+      if (result.value) {
+        this.servicioUsuarios.eliminarVacante(vacante);
         Swal.fire(
           'Eliminado satisfactoriamente!',
           'La noticia ha sido eliminado',

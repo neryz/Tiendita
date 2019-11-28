@@ -23,6 +23,9 @@ export class UsuarioService {
   private notCollection: AngularFirestoreCollection<any>;
   private noticias: Observable<any[]>;
 
+  private vacCollection: AngularFirestoreCollection<any>;
+  private vacantes: Observable<any[]>;
+
   usDoc: AngularFirestoreDocument<any>;
   usuario: Observable<any>;
 
@@ -46,6 +49,9 @@ export class UsuarioService {
 
     this.notCollection = afs.collection<any>('noticias');
     this.noticias = this.prodCollection.valueChanges();
+
+    this.vacCollection = afs.collection<any>('vacantes');
+    this.vacantes = this.prodCollection.valueChanges();
 
   }
 
@@ -79,6 +85,13 @@ export class UsuarioService {
       this.notCollection.add({...noticia}).then( resp => {
       });
       console.log(noticia)
+    }
+
+    crearVacante(vacante: VacanteModel){
+
+      this.vacCollection.add({...vacante}).then( resp => {
+      });
+      console.log(vacante)
     }
 
     // private updateUserData (user) {
@@ -168,6 +181,13 @@ export class UsuarioService {
   eliminarNoticia (idnoticia: NoticiasModel) {
     this.notDoc = this.afs.doc<any>(`noticias/${idnoticia.id}`);
     this.notDoc.delete();
+    console.log();
+
+  }
+
+  eliminarVacante (idvacante: VacanteModel) {
+    this.vacDoc = this.afs.doc<any>(`vacantes/${idvacante.id}`);
+    this.vacDoc.delete();
     console.log();
 
   }

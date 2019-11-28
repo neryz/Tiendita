@@ -23,6 +23,8 @@ import { VacantesComponent } from './pages/vacantes/vacantes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { AgregarComponent } from './pages/agregar/agregar.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { HomeClientComponent } from './client/home-client/home-client.component';
+import { VacantesClientComponent } from './client/vacantes-client/vacantes-client.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     AgregarComponent,
     ContrasenniaComponent,
     FilterPipe,
+    HomeClientComponent,
+    VacantesClientComponent,
   ],
   imports: [
     BrowserModule,

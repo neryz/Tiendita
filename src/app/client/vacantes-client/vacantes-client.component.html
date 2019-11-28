@@ -1,0 +1,71 @@
+<header class="header dark-bg">
+  <div class="toggle-nav">
+    <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+  </div>
+
+  <!--logo start-->
+  <a class="logo">TIENDITA <span class="lite">+</span></a>
+  <!--logo end-->
+</header>
+<!--sidebar start-->
+<aside>
+  <div id="sidebar" class="nav-collapse ">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu">
+      <h4></h4>
+      <li class="">
+        <a routerLinkActive='active' routerLink="/home-client" class="">
+                      <i class="icon_house_alt"></i>
+                      <span>HOME</span>
+                  </a>
+      </li>
+      <li class="">
+        <a routerLinkActive='active' routerLink="/vacantes-client" class="">
+                      <i class="icon_documents_alt"></i>
+                      <span>VACANTES</span>
+                  </a>
+      </li>
+      <li class="" style="cursor: pointer;">
+        <a routerLinkActive='active' routerLink="/login" class="">
+
+                      <span>LOGIN</span>
+                  </a>
+      </li>
+      </ul>
+    <!-- sidebar menu end-->
+  </div>
+</aside>
+<!--sidebar end-->
+
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa fa-bars"></i> VACANTES</h3>
+      </div>
+    </div>
+    <!-- page start-->
+    <!-- Page Content -->
+<!-- page start-->
+<!-- Page Content -->
+<h1>Vacantes disponibles</h1>
+<div class="container" >
+  <div class="col" *ngFor="let vacante of vacantes">
+    <div class="col-md-4">
+      <div class="blog-card blog-card-blog">
+          <div class="blog-table" >
+              <h4 class="blog-card-caption">
+                  <a href="#"  >{{vacante.negocio}} solicita:</a>
+              </h4>
+              <p class="blog-card-description"  >Empleo: {{vacante.empleo}}</p>
+              <p class="blog-card-description"  >Requisitos: {{vacante.requisitos}}</p>
+              <p class="blog-card-description"  >Ubicación: {{vacante.ubicacion}}</p>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /.container -->
+
+<!-- page end-->

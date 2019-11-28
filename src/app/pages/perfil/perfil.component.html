@@ -138,26 +138,26 @@
       </div>
     </div>
 
-    <!-- Seccion para vacantes -->
+    <!-- Seccion para usuarios -->
     <div class="container" >
       <header>
         <h4>Apartado de VACANTES</h4>
       </header>
       <div class="col" >
-        <div class="col-md-4" *ngFor="let usuario of usuarios">
+        <div class="col-md-4" *ngFor="let vacante of vacantes">
           <div class="blog-card blog-card-blog" >
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
-                      <a href="#"  >La empresa {{usuario.negocio}} solicita:</a>
+                      <a href="#"  >La empresa {{vacante.negocio}} solicita:</a>
                   </h4>
-                  <p class="blog-card-description"  >Nombre del empleo: {{usuario.empleo}}</p>
-                  <p class="blog-card-description"  >Requisitos: {{usuario.requisitos}}</p>
-                  <p class="blog-card-description"  >Tiempo: {{usuario.tiempo}}</p>
-                  <p class="blog-card-description"  >Ubicación: {{usuario.ubicacion}}</p>
+                  <p class="blog-card-description"  >Nombre del empleo: {{vacante.empleo}}</p>
+                  <p class="blog-card-description"  >Requisitos: {{vacante.requisitos}}</p>
+                  <p class="blog-card-description"  >Tiempo: {{vacante.tiempo}}</p>
+                  <p class="blog-card-description"  >Ubicación: {{vacante.ubicacion}}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" (click)="verVacante(vacante, editarModal)" class="btn btn-success" data-toggle="modal" data-target="#editarModal" data-whatever="@mdo">Editar</button>
-                <button type="button" (click)="eliminarUsuarios(usuario)" class="btn btn-danger" >Eliminar</button>
+                <button type="button" (click)="eliminarVacante(vacante)" class="btn btn-danger" >Eliminar</button>
               </div>
           </div>
         </div>
@@ -234,7 +234,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button (click)=" crearUsuario(usuario)"  type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="mForm.invalid">Agregar</button>
+            <button (click)="crearVacante(usuario)"  type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="mForm.invalid">Agregar</button>
           </div>
         </div>
       </div>
@@ -249,7 +249,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h5 class="modal-title" id="exampleModalLabelh">Agregar Vacantes</h5>
+              <h5 class="modal-title" id="exampleModalLabelh">Editar Vacantes</h5>
 
             </div>
             <div class="modal-body">
@@ -281,18 +281,6 @@
                     <div *ngIf="mensaje.errors.required" style="color: red">
                       Por favor ingrese los requisitos, el campo no debe de estar vacío
                     </div>
-                  </div>
-
-
-
-
-                  <div class="col">
-                    <label for="advertence" style="color: red">*Seleccione el dia a trabajar</label>
-                    <select id="rol" name="rol" class="form-control" [(ngModel)]="usuario.roles" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #D4AC0D; width: 100%; border-radius: 2px; color: black; cursor: pointer;">
-                      <option value="Fines de semana">Fines de Semana</option>
-                      <option value="Toda la semana">Toda la semana</option>
-                      <option value="Entre semana">Entre semana</option>
-                    </select>
                   </div>
 
 
