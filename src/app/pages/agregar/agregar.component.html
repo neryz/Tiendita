@@ -44,16 +44,6 @@
         </div>
 
 
-
-
-      <div *ngIf="horario.touched && !horario.valid">
-          <div *ngIf="horario.errors.required" style="color: red">
-            Por favor ingrese el horario, el campo no debe de estar vacío
-          </div>
-        </div>
-
-
-
       <input type="text" [(ngModel)]="vacante.ubicacion" name="ubicacion" #ubicacion="ngModel" placeholder="Ubicación" style="background: #F8F9F9; border: none; outline: none; border-bottom: 2px solid #C3C2C0; width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 2px; font-size: 14px; color: black;"required>
       <div *ngIf="ubicacion.touched && !ubicacion.valid">
           <div *ngIf="ubicacion.errors.required" style="color: red">
