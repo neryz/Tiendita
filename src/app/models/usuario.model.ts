@@ -10,6 +10,10 @@ export class UsuarioModel{
   negocio:string;
   password: string;
   descripcion: string;
+  empleo: string;
+  requisitos: string;
+  tiempo: string;
+  anuncio: string;
   ubicacion: string;
   rfc:string;
   numero:string;
