@@ -9,6 +9,7 @@ export class UsuarioModel{
   email: string;
   negocio:string;
   password: string;
+  descripcion: string;
   ubicacion: string;
   rfc:string;
   numero:string;
