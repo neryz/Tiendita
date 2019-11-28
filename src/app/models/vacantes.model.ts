@@ -3,7 +3,5 @@ export class VacanteModel {
   negocio: string;
   empleo: string;
   requisitos: string;
-  horario:  string;
   ubicacion: string;
-  userUid: string;
 }
