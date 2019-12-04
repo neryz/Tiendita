@@ -25,6 +25,7 @@
              </div>
 
              <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalj" data-whatever="@mdo">Nueva Noticia</button> <br> <br>
+
              <button *ngIf="usuario.roles === 'admin'" type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarModal" data-whatever="@mdo">Agregar Vacantes</button>
 
 
@@ -85,18 +86,18 @@
       </header>
       <div class="col"  >
         <div class="col-md-4" *ngFor="let noti of noticias">
-          <div class="blog-card blog-card-blog">
-              <div class="blog-table" >
+          <div class="blog-card blog-card-blog" *ngIf="noti.negocio === usuario.negocio">
+              <div class="blog-table">
                   <h4 class="blog-card-caption">
                       <a href="#"  >{{noti.negocio}}</a>
                   </h4>
                   <p class="blog-card-description"  >{{noti.anuncio}}</p>
               </div>
               <div class="modal-footer" >
-                  <button *ngIf="noti.userUid == userUid; else noOwner" type="button" (click)="verNoticia(noti, exampleModal)" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar</button>
-                <ng-template #noOwner>
-                    <button type="button"  class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar</button>
-                </ng-template>
+                  <button type="button" (click)="verNoticia(noti, exampleModal)" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar</button>
+                <!-- <ng-template #noOwner>
+                    <button disabled="true" class="btn btn-success" >Editar</button>
+                </ng-template> -->
 
 
                 <button type="button" (click)="eliminarNoticia(noti)" class="btn btn-danger" >Eliminar</button>
@@ -145,7 +146,7 @@
       </header>
       <div class="col" >
         <div class="col-md-4" *ngFor="let vacante of vacantes">
-          <div class="blog-card blog-card-blog" >
+          <div class="blog-card blog-card-blog" *ngIf="vacante.negocio === usuario.negocio">
               <div class="blog-table" >
                   <h4 class="blog-card-caption">
                       <a href="#"  >La empresa {{vacante.negocio}} solicita:</a>

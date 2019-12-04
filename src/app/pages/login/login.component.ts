@@ -87,7 +87,6 @@ export class LoginComponent implements OnInit {
   // Esto es una nueva forma de login
   ngOnInit() {
     this.servicioUsuarios.getUsuarios().subscribe( (usuarios) => {
-      console.log('obtenidos->', usuarios)
       this.usuarios = usuarios;
     });
     // this.servicioLogin.getUser().subscribe((usuarioSnapshot) => {

@@ -28,7 +28,6 @@ export class VacantesComponent implements OnInit {
     }
     getVacantes (){
       this.servicioVacantes.getVacantes().subscribe(respuesta => {
-        console.log(respuesta);
         this.vacantes = respuesta;
       });
     }

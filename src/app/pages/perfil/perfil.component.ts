@@ -63,7 +63,6 @@ export class PerfilComponent implements OnInit {
   // onFilterChange(){
   //   if (this.deviceFilter.length > 0) {
   //     this.deviceFiltered = this.device.filter(i => i.name.indexOf(this.deviceFilter) > -1);
-  //     console.log(this.deviceFiltered);
   //   } else {
   //     this.deviceFiltered = this.device.slice(0);
   //   }
@@ -71,25 +70,21 @@ export class PerfilComponent implements OnInit {
 
   getNoticias (){
     this.servicioUsuarios.getNoticias().subscribe(respuesta => {
-      console.log(respuesta);
       this.noticias = respuesta;
     });
   }
   getUsuarios (){
     this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
-      console.log(respuesta);
       this.usuarios = respuesta;
     });
   }
   getVacantes (){
     this.servicioVacantes.getVacantes().subscribe(respuesta => {
-      console.log(respuesta);
       this.vacantes = respuesta;
     });
   }
 
   // getStatusUser(){
-  //   console.log('recupero mi usuario');
   //   this.servicioUsuarios.isAuth().subscribe(auth => {
   //     if (auth){
   //       this.userUid = auth.uid;
@@ -99,14 +94,12 @@ export class PerfilComponent implements OnInit {
   //       // })
   //       this.isUserAdmin = localStorage.getItem
   //       const roles = localStorage.getItem('roles', 'admin');
-  //       console.log(roles) // 'Sarah'
   //        // JSON.parse(localStorage.getItem('notes'))
   //     }
   //   })
   // }
 
   crearUsuario(usuario: UsuarioModel){
-    console.log('Voy a crear al vacante: ');
     this.servicioUsuarios.crearUsuario( usuario );
     this.formValue.resetForm();
     Swal.fire({
@@ -207,7 +200,6 @@ export class PerfilComponent implements OnInit {
   }
 
   editarVacantes (vacante: VacanteModel){
-    console.log('Voy a editar a:  ')
     this.servicioVacantes.editarVacantes( vacante );
 
     Swal.fire({
@@ -241,7 +233,6 @@ export class PerfilComponent implements OnInit {
     this.getVacantes();
     this.getUsuarios();
     this.usuario = this.servicioUsuarios.getCurrentUser();
-    console.log(this.usuario);
   }
 
 }

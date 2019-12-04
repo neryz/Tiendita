@@ -88,7 +88,6 @@ export class UsuariosComponent implements OnInit {
      }
     getUsuarios (){
       this.servicioUsuarios.getUsuarios().subscribe(respuesta => {
-        console.log(respuesta);
         this.usuarios = respuesta;
       });
     }

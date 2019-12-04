@@ -37,13 +37,11 @@ export class HomeComponent implements OnInit {
   }
   getVacantes (){
     this.servicioVacantes.getVacantes().subscribe(respuesta => {
-      console.log(respuesta);
       this.vacantes = respuesta;
     });
   }
   getNoticias (){
     this.servicioUsuarios.getNoticias().subscribe(respuesta => {
-      console.log(respuesta);
       this.noticias = respuesta;
     });
   }
